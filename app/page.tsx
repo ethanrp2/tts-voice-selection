@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Header } from "./components/header";
 import { BottomNav } from "./components/bottom-nav";
 import { VoiceCard } from "./components/voice-card";
@@ -30,8 +30,7 @@ export default function VotePage() {
   const [submitting, setSubmitting] = useState(false);
   const [loading, setLoading] = useState(true);
   const { play, stop, playingId, loadingId } = useAudio();
-
-  const allVoted = votes.empathy && votes.authority && votes.energy;
+  const submittingRef = useRef(false);
 
   const fetchMatchup = useCallback(async () => {
     setLoading(true);
@@ -52,27 +51,61 @@ export default function VotePage() {
     fetchMatchup();
   }, [fetchMatchup]);
 
-  const handleSubmit = async () => {
-    if (!allVoted || !matchup || submitting) return;
+  // Auto-advance when all 3 votes are cast
+  useEffect(() => {
+    const allVoted = votes.empathy && votes.authority && votes.energy;
+    if (!allVoted || !matchup || submittingRef.current) return;
+
+    submittingRef.current = true;
+    setSubmitting(true);
+    stop();
+
+    const submitAndAdvance = async () => {
+      try {
+        await fetch("/api/vote", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            matchupId: matchup.matchupId,
+            votes: {
+              empathy: votes.empathy!,
+              authority: votes.authority!,
+              energy: votes.energy!,
+            },
+          }),
+        });
+        // Brief delay for visual feedback
+        await new Promise((r) => setTimeout(r, 600));
+        await fetchMatchup();
+      } finally {
+        setSubmitting(false);
+        submittingRef.current = false;
+      }
+    };
+
+    submitAndAdvance();
+  }, [votes, matchup, stop, fetchMatchup]);
+
+  const handleFlag = async (voiceId: string) => {
+    if (!matchup || submittingRef.current) return;
+    submittingRef.current = true;
     setSubmitting(true);
     stop();
 
     try {
-      await fetch("/api/vote", {
+      await fetch("/api/flag", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          voiceId,
           matchupId: matchup.matchupId,
-          votes: {
-            empathy: votes.empathy!,
-            authority: votes.authority!,
-            energy: votes.energy!,
-          },
         }),
       });
+      await new Promise((r) => setTimeout(r, 600));
       await fetchMatchup();
     } finally {
       setSubmitting(false);
+      submittingRef.current = false;
     }
   };
 
@@ -80,7 +113,7 @@ export default function VotePage() {
     <div className="h-dvh flex flex-col bg-surface overflow-hidden">
       <Header />
 
-      <main className="flex-1 flex flex-col items-center justify-center px-4 py-1 overflow-hidden gap-3">
+      <main className="flex-1 flex flex-col items-center justify-center px-4 py-2 overflow-hidden gap-4">
         {/* Test Phrase Section */}
         <section className="w-full max-w-2xl text-center shrink-0">
           <span className="text-[10px] uppercase tracking-[0.2em] text-outline mb-1 block font-label opacity-60">
@@ -106,6 +139,7 @@ export default function VotePage() {
             onPlay={() =>
               matchup && play(matchup.voiceA.id, matchup.phrase)
             }
+            onFlag={() => matchup && handleFlag(matchup.voiceA.id)}
           />
           <VoiceCard
             label="Profile B"
@@ -116,11 +150,12 @@ export default function VotePage() {
             onPlay={() =>
               matchup && play(matchup.voiceB.id, matchup.phrase)
             }
+            onFlag={() => matchup && handleFlag(matchup.voiceB.id)}
           />
         </div>
 
         {/* Vote Toggles */}
-        <div className="w-full max-w-xl space-y-2 shrink-0">
+        <div className="w-full max-w-xl space-y-3 shrink-0">
           <VoteRow
             category="Empathy"
             selected={votes.empathy}
@@ -136,24 +171,6 @@ export default function VotePage() {
             selected={votes.energy}
             onSelect={(c) => setVotes((v) => ({ ...v, energy: c }))}
           />
-        </div>
-
-        {/* Next Pair Button */}
-        <div className="w-full max-w-xs shrink-0 pt-1 pb-2">
-          <button
-            onClick={handleSubmit}
-            disabled={!allVoted || submitting}
-            className={`w-full py-4 rounded-full font-headline font-extrabold text-sm flex items-center justify-center gap-2 transition-all ${
-              allVoted
-                ? "bg-primary text-on-primary shadow-[0_0_20px_rgba(208,149,255,0.3)] active:scale-95"
-                : "bg-white/5 text-outline cursor-not-allowed border border-white/5"
-            }`}
-          >
-            {submitting ? "Submitting..." : "Next Pair"}
-            <span className="material-symbols-outlined text-lg">
-              arrow_forward
-            </span>
-          </button>
         </div>
       </main>
 

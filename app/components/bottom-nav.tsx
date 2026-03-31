@@ -52,7 +52,7 @@ export function BottomNav() {
           leaderboard
         </span>
         <span className="font-label font-medium text-[9px] tracking-[0.05em] uppercase">
-          {isLeaderboard ? "Leaderboard" : "Stats"}
+          Leaderboard
         </span>
         {isLeaderboard && (
           <span className="absolute -bottom-1 w-1 h-1 bg-accent-cyan rounded-full" />

@@ -1,0 +1,55 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e5]:
+        - generic [ref=e6]: graphic_eq
+        - generic [ref=e7]: VOICE ARENA
+    - main [ref=e8]:
+      - generic [ref=e9]:
+        - generic [ref=e10]: Test Phrase
+        - heading "Loading..." [level=1] [ref=e11]
+      - generic [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]:
+            - generic [ref=e15]: Profile A
+            - heading "Voice A" [level=2] [ref=e16]
+          - button "play_arrow" [ref=e18]:
+            - generic [ref=e19]: play_arrow
+          - button "flag Bad Voice" [ref=e31]:
+            - generic [ref=e32]: flag
+            - text: Bad Voice
+        - generic [ref=e33]:
+          - generic [ref=e34]:
+            - generic [ref=e35]: Profile B
+            - heading "Voice B" [level=2] [ref=e36]
+          - button "play_arrow" [ref=e38]:
+            - generic [ref=e39]: play_arrow
+          - button "flag Bad Voice" [ref=e51]:
+            - generic [ref=e52]: flag
+            - text: Bad Voice
+      - generic [ref=e53]:
+        - generic [ref=e54]:
+          - generic [ref=e55]: Empathy
+          - generic [ref=e56]:
+            - button "A" [ref=e57]
+            - button "B" [ref=e58]
+        - generic [ref=e59]:
+          - generic [ref=e60]: Authority
+          - generic [ref=e61]:
+            - button "A" [ref=e62]
+            - button "B" [ref=e63]
+        - generic [ref=e64]:
+          - generic [ref=e65]: Energy
+          - generic [ref=e66]:
+            - button "A" [ref=e67]
+            - button "B" [ref=e68]
+    - navigation [ref=e69]:
+      - link "thumbs_up_down Vote" [ref=e70] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e71]: thumbs_up_down
+        - generic [ref=e72]: Vote
+      - link "leaderboard Stats" [ref=e74] [cursor=pointer]:
+        - /url: /leaderboard
+        - generic [ref=e75]: leaderboard
+        - generic [ref=e76]: Stats
+  - alert [ref=e77]

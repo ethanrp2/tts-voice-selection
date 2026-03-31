@@ -19,7 +19,7 @@ interface VoiceEntry {
 }
 
 export default function LeaderboardPage() {
-  const [category, setCategory] = useState("overall");
+  const [category, setCategory] = useState("empathy");
   const [voices, setVoices] = useState<VoiceEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [offset, setOffset] = useState(0);

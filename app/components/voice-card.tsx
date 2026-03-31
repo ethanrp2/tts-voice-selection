@@ -7,6 +7,7 @@ interface VoiceCardProps {
   isPlaying: boolean;
   isLoading: boolean;
   onPlay: () => void;
+  onFlag: () => void;
 }
 
 export function VoiceCard({
@@ -16,6 +17,7 @@ export function VoiceCard({
   isPlaying,
   isLoading,
   onPlay,
+  onFlag,
 }: VoiceCardProps) {
   const isPurple = variant === "a";
   const accentColor = isPurple ? "#d095ff" : "#7DF9FF";
@@ -34,7 +36,7 @@ export function VoiceCard({
       : [30, 20, 50, 70, 40, 60, 80, 45, 55, 35];
 
   return (
-    <div className="group bg-surface-container-low rounded-xl p-4 border border-white/5 relative flex flex-col justify-between">
+    <div className="group bg-surface-container-low rounded-xl p-4 border border-white/5 relative flex flex-col justify-between aspect-[4/5] md:aspect-auto">
       <div>
         <span className="text-[10px] font-label text-outline uppercase tracking-widest block mb-0.5">
           {label}
@@ -43,7 +45,7 @@ export function VoiceCard({
           {name}
         </h2>
       </div>
-      <div className="flex justify-center items-center py-4">
+      <div className="flex justify-center items-center flex-1 py-2">
         <button
           onClick={onPlay}
           disabled={isLoading}
@@ -58,7 +60,7 @@ export function VoiceCard({
         </button>
       </div>
       {/* Waveform Visualization */}
-      <div className="flex items-end justify-around h-8 w-full">
+      <div className="flex items-end gap-0.5 h-8 w-full">
         {barHeights.map((height, i) => (
           <div
             key={i}
@@ -70,6 +72,14 @@ export function VoiceCard({
           />
         ))}
       </div>
+      {/* Bad Voice Flag Button */}
+      <button
+        onClick={onFlag}
+        className="mt-3 flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg border border-red-900/40 text-red-400/60 text-[10px] font-bold uppercase tracking-wider hover:bg-red-500/10 transition-colors w-full"
+      >
+        <span className="material-symbols-outlined text-sm">flag</span>
+        Bad Voice
+      </button>
     </div>
   );
 }
