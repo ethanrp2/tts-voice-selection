@@ -1,0 +1,54 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e5]:
+        - generic [ref=e6]: graphic_eq
+        - generic [ref=e7]: VOICE ARENA
+    - main [ref=e8]:
+      - generic [ref=e9]:
+        - generic [ref=e10]: Test Phrase
+        - heading "Loading..." [level=1] [ref=e11]
+      - generic [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]:
+            - generic [ref=e15]: Profile A
+            - heading "Voice A" [level=2] [ref=e16]
+          - button "play_arrow" [ref=e18]:
+            - generic [ref=e19]: play_arrow
+        - generic [ref=e31]:
+          - generic [ref=e32]:
+            - generic [ref=e33]: Profile B
+            - heading "Voice B" [level=2] [ref=e34]
+          - button "play_arrow" [ref=e36]:
+            - generic [ref=e37]: play_arrow
+      - generic [ref=e49]:
+        - generic [ref=e50]:
+          - generic [ref=e51]: Empathy
+          - generic [ref=e52]:
+            - button "A" [ref=e53]
+            - button "B" [ref=e54]
+        - generic [ref=e55]:
+          - generic [ref=e56]: Authority
+          - generic [ref=e57]:
+            - button "A" [ref=e58]
+            - button "B" [ref=e59]
+        - generic [ref=e60]:
+          - generic [ref=e61]: Energy
+          - generic [ref=e62]:
+            - button "A" [ref=e63]
+            - button "B" [ref=e64]
+      - button "Next Pair arrow_forward" [disabled] [ref=e66]:
+        - text: Next Pair
+        - generic [ref=e67]: arrow_forward
+    - navigation [ref=e68]:
+      - link "thumbs_up_down Vote" [ref=e69] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e70]: thumbs_up_down
+        - generic [ref=e71]: Vote
+      - link "leaderboard Stats" [ref=e73] [cursor=pointer]:
+        - /url: /leaderboard
+        - generic [ref=e74]: leaderboard
+        - generic [ref=e75]: Stats
+  - button "Open Next.js Dev Tools" [ref=e81] [cursor=pointer]:
+    - img [ref=e82]
+  - alert [ref=e85]
