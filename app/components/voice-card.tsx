@@ -20,32 +20,23 @@ export function VoiceCard({
   onFlag,
 }: VoiceCardProps) {
   const isPurple = variant === "a";
-  const accentColor = isPurple ? "#d095ff" : "#7DF9FF";
   const glowShadow = isPurple
     ? "shadow-[0_0_25px_rgba(208,149,255,0.5)]"
     : "shadow-[0_0_25px_rgba(125,249,255,0.5)]";
   const bgClass = isPurple ? "bg-[#d095ff]" : "bg-accent-cyan";
-  const barActiveClass = isPurple
-    ? "waveform-bar-active-a"
-    : "waveform-bar-active-b";
-
-  // Generate random-ish waveform heights (deterministic per variant)
-  const barHeights =
-    variant === "a"
-      ? [20, 45, 30, 60, 85, 70, 90, 40, 55, 75]
-      : [30, 20, 50, 70, 40, 60, 80, 45, 55, 35];
+  const displayName = name.split(/\s(?:-|–|—|\||\().*/)[0].trim() || name;
 
   return (
-    <div className="group bg-surface-container-low rounded-xl p-3 border border-white/5 relative flex flex-col gap-1 overflow-hidden min-h-0">
+    <div className="group bg-surface-container-low rounded-xl p-3 border border-white/5 relative flex flex-col gap-2 overflow-hidden min-h-0 h-full">
       <div className="min-w-0">
         <span className="text-[10px] font-label text-outline uppercase tracking-widest block mb-0.5">
           {label}
         </span>
         <h2 className="text-sm font-headline font-bold text-on-surface truncate">
-          {name}
+          {displayName}
         </h2>
       </div>
-      <div className="flex justify-center items-center flex-1 min-h-0">
+      <div className="flex justify-center items-center flex-1 min-h-[72px]">
         <button
           onClick={onPlay}
           disabled={isLoading}
@@ -59,23 +50,10 @@ export function VoiceCard({
           </span>
         </button>
       </div>
-      {/* Waveform Visualization */}
-      <div className="flex items-end gap-0.5 h-8 w-full">
-        {barHeights.map((height, i) => (
-          <div
-            key={i}
-            className={`waveform-bar ${isPlaying ? barActiveClass : ""}`}
-            style={{
-              height: `${height}%`,
-              ...(isPlaying ? { backgroundColor: accentColor } : {}),
-            }}
-          />
-        ))}
-      </div>
       {/* Bad Voice Flag Button */}
       <button
         onClick={onFlag}
-        className="mt-1 flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg border border-red-900/40 text-red-400/60 text-[10px] font-bold uppercase tracking-wider hover:bg-red-500/10 transition-colors w-full"
+        className="mt-auto flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg border border-red-900/40 text-red-400/60 text-[10px] font-bold uppercase tracking-wider hover:bg-red-500/10 transition-colors w-full"
       >
         <span className="material-symbols-outlined text-sm">flag</span>
         Bad Voice

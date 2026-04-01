@@ -5,7 +5,7 @@ import { Header } from "./components/header";
 import { BottomNav } from "./components/bottom-nav";
 import { VoiceCard } from "./components/voice-card";
 import { VoteRow } from "./components/vote-row";
-import { useAudio } from "./hooks/use-audio";
+import { useAudio, prefetchAudio } from "./hooks/use-audio";
 
 interface Matchup {
   matchupId: string;
@@ -38,9 +38,12 @@ export default function VotePage() {
     try {
       const res = await fetch("/api/matchup");
       if (res.ok) {
-        const data = await res.json();
+        const data: Matchup = await res.json();
         setMatchup(data);
         setVotes({ empathy: null, authority: null, energy: null });
+        // Prefetch both voice audios immediately
+        prefetchAudio(data.voiceA.id, data.phrase);
+        prefetchAudio(data.voiceB.id, data.phrase);
       }
     } finally {
       setLoading(false);
@@ -62,7 +65,8 @@ export default function VotePage() {
 
     const submitAndAdvance = async () => {
       try {
-        await fetch("/api/vote", {
+        // Fire-and-forget the vote - don't wait for it
+        fetch("/api/vote", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -74,8 +78,7 @@ export default function VotePage() {
             },
           }),
         });
-        // Brief delay for visual feedback
-        await new Promise((r) => setTimeout(r, 600));
+        // Immediately fetch next matchup
         await fetchMatchup();
       } finally {
         setSubmitting(false);
@@ -93,7 +96,8 @@ export default function VotePage() {
     stop();
 
     try {
-      await fetch("/api/flag", {
+      // Fire-and-forget the flag
+      fetch("/api/flag", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -101,7 +105,7 @@ export default function VotePage() {
           matchupId: matchup.matchupId,
         }),
       });
-      await new Promise((r) => setTimeout(r, 600));
+      // Immediately fetch next matchup
       await fetchMatchup();
     } finally {
       setSubmitting(false);
@@ -119,7 +123,7 @@ export default function VotePage() {
           <span className="text-[10px] uppercase tracking-[0.2em] text-outline mb-1 block font-label opacity-60">
             Test Phrase
           </span>
-          <h1 className="text-lg font-headline font-extrabold tracking-tight text-on-surface leading-snug px-2">
+          <h1 className="text-base font-headline font-extrabold tracking-tight text-on-surface leading-snug px-2">
             {loading ? (
               <span className="text-on-surface-variant">Loading...</span>
             ) : (
@@ -129,7 +133,7 @@ export default function VotePage() {
         </section>
 
         {/* Voice Comparison Cards - Side by Side */}
-        <div className="grid grid-cols-2 gap-3 w-full max-w-xl max-h-[35vh] overflow-hidden">
+        <div className="grid grid-cols-2 gap-3 w-full max-w-xl flex-1 min-h-0">
           <VoiceCard
             label="Profile A"
             name={matchup?.voiceA.name || "Voice A"}
@@ -155,7 +159,7 @@ export default function VotePage() {
         </div>
 
         {/* Vote Toggles */}
-        <div className="w-full max-w-xl space-y-3 pb-3 shrink-0">
+        <div className="w-full max-w-xl space-y-3 pb-4 shrink-0">
           <VoteRow
             category="Empathy"
             selected={votes.empathy}

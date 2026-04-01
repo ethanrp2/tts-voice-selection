@@ -124,3 +124,25 @@ It can also happen if the client has a browser extension installed which messes 
  @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:3272
 [  119311ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
 [  119383ms] [LOG] [Fast Refresh] done in 173ms @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[  440522ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[  440566ms] [LOG] [Fast Refresh] done in 46ms @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[  453631ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[  453739ms] [LOG] [Fast Refresh] done in 163ms @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[  462157ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[  462205ms] [LOG] [Fast Refresh] done in 19ms @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[  468621ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[  468664ms] [LOG] [Fast Refresh] done in 29ms @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[  633513ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[  633640ms] [LOG] [Fast Refresh] done in 33ms @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[  639048ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[  639076ms] [LOG] [Fast Refresh] done in 57ms @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[  701402ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[  701444ms] [LOG] [Fast Refresh] done in 46ms @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[  811907ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[  811990ms] [LOG] [Fast Refresh] done in 83ms @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[  813951ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[  813980ms] [LOG] [Fast Refresh] done in 62ms @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[ 1001580ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[ 1001764ms] [LOG] [Fast Refresh] done in 17ms @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[ 1003304ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[ 1003382ms] [LOG] [Fast Refresh] done in 6ms @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431

@@ -50,8 +50,8 @@ export async function POST(request: Request) {
       },
       output_format: {
         container: "wav",
-        encoding: "pcm_f32le",
-        sample_rate: 44100,
+        encoding: "pcm_s16le",
+        sample_rate: 24000,
       },
       speed: "normal",
       generation_config: {
@@ -69,9 +69,8 @@ export async function POST(request: Request) {
     );
   }
 
-  // Stream the audio bytes back
-  const audioBytes = await cartesiaResponse.arrayBuffer();
-  return new Response(audioBytes, {
+  // Stream audio bytes directly from Cartesia
+  return new Response(cartesiaResponse.body, {
     headers: {
       "Content-Type": "audio/wav",
       "Cache-Control": "public, max-age=3600",
