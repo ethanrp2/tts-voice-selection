@@ -1,0 +1,20 @@
+{
+  "generatedAt": "2026-04-01T18:03:48.839Z",
+  "requestedVoiceCount": 33,
+  "modelValidation": {
+    "status": 401
+  },
+  "voiceListValidation": null,
+  "selectedModelId": "eleven_v3",
+  "resolved": [],
+  "probes": [],
+  "inserted": [],
+  "missing": [],
+  "failures": [
+    {
+      "step": "model_validation",
+      "status": 401,
+      "body": "{\"detail\":{\"status\":\"missing_permissions\",\"message\":\"The API key you used is missing the permission models_read to execute this operation.\"}}"
+    }
+  ]
+}

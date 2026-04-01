@@ -1,0 +1,67 @@
+<h2>New Matchup Transition — 3 Approaches</h2>
+<p class="subtitle">How to signal "your vote is in, here's a fresh matchup"</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Card Sweep Animation</h3>
+      <p>After the 3rd vote, the voice cards and vote rows <strong>slide out</strong> (left/right or downward), a brief "Vote recorded" confirmation flashes in the center, then new cards <strong>slide in</strong> from the opposite direction. Total duration ~800ms.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul>
+          <li>Very clear visual break — old content physically leaves</li>
+          <li>The gap between exit and enter creates a natural "beat"</li>
+          <li>Confirms vote submission with the flash text</li>
+        </ul></div>
+        <div class="cons"><h4>Cons</h4><ul>
+          <li>Slightly longer perceived wait (~800ms)</li>
+          <li>More complex to implement (exit + enter choreography)</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Fade-Through with Confirmation Toast</h3>
+      <p>After the 3rd vote, the entire main content area <strong>fades out</strong> (~200ms), a small toast/pill appears at the top saying <strong>"Vote recorded ✓ — New matchup"</strong> that auto-dismisses, then new content <strong>fades in</strong> (~300ms). Votes reset visually during the fade.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul>
+          <li>Simple, clean, and fast (~500ms total)</li>
+          <li>Toast directly addresses both confusions (vote saved + new matchup)</li>
+          <li>Easy to implement with CSS opacity transitions</li>
+        </ul></div>
+        <div class="cons"><h4>Cons</h4><ul>
+          <li>Less dramatic — subtle users might still miss it</li>
+          <li>Toast needs careful positioning to not obstruct</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Full-Screen Flash + Scale Reset</h3>
+      <p>After the 3rd vote, a brief <strong>full-width color pulse</strong> (using the app's purple/cyan glow) washes over the content area. The voice cards simultaneously <strong>scale down slightly</strong> (0.95) then <strong>scale back up</strong> to 1.0 with the new data. A small "Matchup #N" counter increments visually.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul>
+          <li>Very noticeable — the glow pulse is unmissable</li>
+          <li>Feels like a "level up" moment, gamified</li>
+          <li>Matchup counter gives persistent context</li>
+        </ul></div>
+        <div class="cons"><h4>Cons</h4><ul>
+          <li>Could feel flashy/distracting after many rounds</li>
+          <li>Full-screen effects can feel heavy on mobile</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>My Recommendation</h3>
+  <p><strong>Option B (Fade-Through + Toast)</strong> strikes the best balance. It's fast, clearly communicates both "vote saved" and "new matchup loaded," and is lightweight enough to not annoy after dozens of rounds. The toast directly solves both confusions A and B. It also fits the existing app's clean, minimal aesthetic.</p>
+  <p>Option A is great if you want more drama, Option C if you want gamification — but B is the sweet spot for clarity without fatigue.</p>
+</div>

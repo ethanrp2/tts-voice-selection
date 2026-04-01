@@ -37,11 +37,46 @@ Set these Environment Variables in Vercel for both `Preview` and `Production` be
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 - `SUPABASE_SERVICE_ROLE_KEY`
 - `CARTESIA_API_KEY`
+- `RIME_API_KEY`
+- `ELEVENLABS_API_KEY`
+- `ELEVENLABS_MODEL_ID` (optional, defaults to `eleven_v3`)
 
 Important:
 - `NEXT_PUBLIC_*` values are inlined at build time, so changing them requires a redeploy.
 - Never expose `SUPABASE_SERVICE_ROLE_KEY` as a `NEXT_PUBLIC_*` variable.
+- Voice synthesis is provider-aware (`cartesia` / `rime` / `elevenlabs`) based on each row in `voices`.
+- ElevenLabs sync needs API key permissions: `models_read`, `voices_read`, and text-to-speech access.
+- Apply `supabase/migrations/20260401_add_rime_speaker_column.sql` when you want dedicated `rime_speaker` storage.
 - Use `.env.example` as the canonical variable list.
+
+## ElevenLabs Voice Sync
+
+1. Apply `supabase/migrations/20260401_add_elevenlabs_voice_support.sql`.
+2. Ensure `ELEVENLABS_API_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, and `NEXT_PUBLIC_SUPABASE_URL` are set.
+3. Run:
+
+```bash
+pnpm sync:elevenlabs-voices
+```
+
+The script validates API permissions, resolves requested names to voice IDs, probes each resolved voice with TTS, upserts valid voices into `voices`, upserts baseline ELO rows, and writes a report to `reports/elevenlabs-voice-sync-report.json`.
+
+## Cartesia Voice Sync
+
+Ensure `CARTESIA_API_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, and `NEXT_PUBLIC_SUPABASE_URL` are set, then run:
+
+```bash
+pnpm sync:cartesia-voices
+```
+
+The script:
+- Fetches the full Cartesia voice catalog with pagination (`starting_after`).
+- Resolves requested names using exact normalized base-name match (e.g. `"Brooke - Big Sister"` resolves to `Brooke`).
+- Probes each resolved voice via Cartesia TTS (`sonic-3`) and only upserts probe-passing voices.
+- Upserts baseline ELO rows for inserted/updated voices.
+- Deactivates obsolete Cartesia rows (`active=false`) that are not in the verified target set.
+- Leaves non-Cartesia providers unchanged.
+- Writes a report to `reports/cartesia-voice-sync-report.json`, including missing requested names that were skipped.
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 

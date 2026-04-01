@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "sync:elevenlabs-voices": "node scripts/sync-elevenlabs-voices.mjs",
+    "sync:cartesia-voices": "node scripts/sync-cartesia-voices.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.101.0",

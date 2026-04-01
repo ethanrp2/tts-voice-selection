@@ -6,7 +6,7 @@ export async function GET() {
   // Get 2 random active voices
   const { data: voices, error: voicesError } = await supabase
     .from("voices")
-    .select("id, name, cartesia_voice_id")
+    .select("id, name")
     .eq("active", true);
 
   if (voicesError || !voices || voices.length < 2) {

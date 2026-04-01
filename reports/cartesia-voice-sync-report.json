@@ -1,0 +1,977 @@
+{
+  "generatedAt": "2026-04-01T18:47:31.448Z",
+  "requestedVoiceCount": 26,
+  "modelId": "sonic-3",
+  "catalogPages": [
+    {
+      "page": 1,
+      "status": 200,
+      "cursor": null
+    },
+    {
+      "page": 2,
+      "status": 200,
+      "cursor": "79f8b5fb-2cc8-479a-80df-29f7a7cf1a3e"
+    },
+    {
+      "page": 3,
+      "status": 200,
+      "cursor": "b0689631-eee7-4a6c-bb86-195f1d267c2e"
+    },
+    {
+      "page": 4,
+      "status": 200,
+      "cursor": "fc923f89-1de5-4ddf-b93c-6da2ba63428a"
+    },
+    {
+      "page": 5,
+      "status": 200,
+      "cursor": "098fb15d-2597-4186-8b74-25340050b6e7"
+    },
+    {
+      "page": 6,
+      "status": 200,
+      "cursor": "e1717dc3-b87b-4720-aa7f-b6db290e0609"
+    },
+    {
+      "page": 7,
+      "status": 200,
+      "cursor": "69c18e1d-fab0-4747-b9da-58617cd8b9e4"
+    },
+    {
+      "page": 8,
+      "status": 200,
+      "cursor": "8d826d43-20ad-4c56-8d37-1048eccca1bf"
+    },
+    {
+      "page": 9,
+      "status": 200,
+      "cursor": "a81fccdc-5595-4dfc-ae76-4de6a515b8a2"
+    },
+    {
+      "page": 10,
+      "status": 200,
+      "cursor": "59b37da2-92ba-401a-9e4e-b1d16898d9bc"
+    },
+    {
+      "page": 11,
+      "status": 200,
+      "cursor": "d0ff6870-dd30-420d-8568-d756d806ea62"
+    },
+    {
+      "page": 12,
+      "status": 200,
+      "cursor": "df89f42f-f285-4613-adbf-14eedcec4c9e"
+    },
+    {
+      "page": 13,
+      "status": 200,
+      "cursor": "e361b786-2768-4308-9369-a09793d4dd73"
+    },
+    {
+      "page": 14,
+      "status": 200,
+      "cursor": "664aec8a-64a4-4437-8a0b-a61aa4f51fe6"
+    },
+    {
+      "page": 15,
+      "status": 200,
+      "cursor": "6a360542-a117-4ed5-9e09-e8bf9b05eabb"
+    },
+    {
+      "page": 16,
+      "status": 200,
+      "cursor": "a7b8d8fa-f6e5-4908-900e-0c11d1d82519"
+    },
+    {
+      "page": 17,
+      "status": 200,
+      "cursor": "03496517-369a-4db1-8236-3d3ae459ddf7"
+    },
+    {
+      "page": 18,
+      "status": 200,
+      "cursor": "146485fd-8736-41c7-88a8-7cdd0da34d84"
+    },
+    {
+      "page": 19,
+      "status": 200,
+      "cursor": "ed81fd13-2016-4a49-8fe3-c0d2761695fc"
+    },
+    {
+      "page": 20,
+      "status": 200,
+      "cursor": "c99d36f3-5ffd-4253-803a-535c1bc9c306"
+    },
+    {
+      "page": 21,
+      "status": 200,
+      "cursor": "65b25c5d-ff07-4687-a04c-da2f43ef6fa9"
+    },
+    {
+      "page": 22,
+      "status": 200,
+      "cursor": "9cebb910-d4b7-4a4a-85a4-12c79137724c"
+    },
+    {
+      "page": 23,
+      "status": 200,
+      "cursor": "82a7fc13-2927-4e42-9b8a-bb1f9e506521"
+    },
+    {
+      "page": 24,
+      "status": 200,
+      "cursor": "1cf751f6-8749-43ab-98bd-230dd633abdb"
+    },
+    {
+      "page": 25,
+      "status": 200,
+      "cursor": "ab7c61f5-3daa-47dd-a23b-4ac0aac5f5c3"
+    },
+    {
+      "page": 26,
+      "status": 200,
+      "cursor": "87748186-23bb-4158-a1eb-332911b0b708"
+    },
+    {
+      "page": 27,
+      "status": 200,
+      "cursor": "40104aff-a015-4da1-9912-af950fbec99e"
+    },
+    {
+      "page": 28,
+      "status": 200,
+      "cursor": "9b953e7b-86a8-42f0-b625-1434fb15392b"
+    },
+    {
+      "page": 29,
+      "status": 200,
+      "cursor": "7a5d4663-88ae-47b7-808e-8f9b9ee4127b"
+    },
+    {
+      "page": 30,
+      "status": 200,
+      "cursor": "f4e8781b-a420-4080-81cf-576331238efa"
+    },
+    {
+      "page": 31,
+      "status": 200,
+      "cursor": "0b32066b-2bcc-44b9-89ab-0223a09d1606"
+    },
+    {
+      "page": 32,
+      "status": 200,
+      "cursor": "bfd3644b-d561-4b1c-a01f-d9af98cb67c0"
+    },
+    {
+      "page": 33,
+      "status": 200,
+      "cursor": "bf32f849-7bc9-4b91-8c62-954588efcc30"
+    },
+    {
+      "page": 34,
+      "status": 200,
+      "cursor": "0e21713a-5e9a-428a-bed4-90d410b87f13"
+    },
+    {
+      "page": 35,
+      "status": 200,
+      "cursor": "3d335974-4c4a-400a-84dc-ebf4b73aada6"
+    },
+    {
+      "page": 36,
+      "status": 200,
+      "cursor": "2a3503b2-b6b6-4534-a224-e8c0679cec4a"
+    },
+    {
+      "page": 37,
+      "status": 200,
+      "cursor": "414e332a-e839-43d6-a039-df2f539b5d84"
+    },
+    {
+      "page": 38,
+      "status": 200,
+      "cursor": "a50a04b8-35ee-487e-8b87-97f0eee68a64"
+    },
+    {
+      "page": 39,
+      "status": 200,
+      "cursor": "0b6d3ccb-f421-4e49-80f7-4bfa39f6eb8e"
+    },
+    {
+      "page": 40,
+      "status": 200,
+      "cursor": "c96a7d7d-3457-4979-8665-522f7b3e36fb"
+    },
+    {
+      "page": 41,
+      "status": 200,
+      "cursor": "71a3c5f3-04bd-4716-ba0b-16f9a5afbd6e"
+    },
+    {
+      "page": 42,
+      "status": 200,
+      "cursor": "fb78f09f-f998-4061-ad51-d71f90388f0e"
+    },
+    {
+      "page": 43,
+      "status": 200,
+      "cursor": "b08c966e-2146-4592-99eb-3171a714a43c"
+    },
+    {
+      "page": 44,
+      "status": 200,
+      "cursor": "8843adfb-77d3-455a-86f9-de0651555ec6"
+    },
+    {
+      "page": 45,
+      "status": 200,
+      "cursor": "63426c82-a0c9-4f23-a175-50eb64c95ec1"
+    },
+    {
+      "page": 46,
+      "status": 200,
+      "cursor": "27c12970-3efb-4f39-a78a-2fbb7bddc941"
+    },
+    {
+      "page": 47,
+      "status": 200,
+      "cursor": "dda51133-5d43-4a3b-84e6-e68c13f60cba"
+    },
+    {
+      "page": 48,
+      "status": 200,
+      "cursor": "f6f315e4-4fb3-4440-92ea-2edb01f9bf1b"
+    },
+    {
+      "page": 49,
+      "status": 200,
+      "cursor": "de07efe3-b309-418b-bdca-42827223efd2"
+    },
+    {
+      "page": 50,
+      "status": 200,
+      "cursor": "330c4fa0-1da3-4c55-8e97-951bfd724e20"
+    },
+    {
+      "page": 51,
+      "status": 200,
+      "cursor": "22f1a356-56c2-4428-bc91-2ab2e6d0c215"
+    },
+    {
+      "page": 52,
+      "status": 200,
+      "cursor": "b56c6aac-f35f-46f7-9361-e8f078cec72e"
+    },
+    {
+      "page": 53,
+      "status": 200,
+      "cursor": "f6ce3444-478b-4ce4-982e-bcb72dffe7aa"
+    },
+    {
+      "page": 54,
+      "status": 200,
+      "cursor": "a924b0e6-9253-4711-8fc3-5cb8e0188c94"
+    },
+    {
+      "page": 55,
+      "status": 200,
+      "cursor": "17488b72-f815-44d8-bdd9-869971c3ec06"
+    },
+    {
+      "page": 56,
+      "status": 200,
+      "cursor": "c0f43c66-9f21-4034-b485-8f1d3340d759"
+    },
+    {
+      "page": 57,
+      "status": 200,
+      "cursor": "3ccc4544-84f7-45e3-ae57-5c52b5a1fac6"
+    },
+    {
+      "page": 58,
+      "status": 200,
+      "cursor": "a2364c9d-1fe3-4553-9eff-100c4fe5ffc8"
+    },
+    {
+      "page": 59,
+      "status": 200,
+      "cursor": "1628cfcd-a161-4e47-98ff-46bffa4ab290"
+    },
+    {
+      "page": 60,
+      "status": 200,
+      "cursor": "5319c0b1-3dd1-4c00-b721-bfd2ec88ef56"
+    },
+    {
+      "page": 61,
+      "status": 200,
+      "cursor": "cc00e582-ed66-4004-8336-0175b85c85f6"
+    },
+    {
+      "page": 62,
+      "status": 200,
+      "cursor": "0834f3df-e650-4766-a20c-5a93a43aa6e3"
+    },
+    {
+      "page": 63,
+      "status": 200,
+      "cursor": "30212483-5c20-479c-8121-f93cd24e30a6"
+    },
+    {
+      "page": 64,
+      "status": 200,
+      "cursor": "b503f001-80b8-49d3-8666-8d7700fc5ca2"
+    },
+    {
+      "page": 65,
+      "status": 200,
+      "cursor": "0d42f0f6-c019-4082-b250-1c16133d1c82"
+    },
+    {
+      "page": 66,
+      "status": 200,
+      "cursor": "2f22b9bc-b0eb-4cb6-b5ae-0c099a0fdfad"
+    },
+    {
+      "page": 67,
+      "status": 200,
+      "cursor": "f227bc18-3704-47fe-b759-8c78a450fdfa"
+    },
+    {
+      "page": 68,
+      "status": 200,
+      "cursor": "d2870b91-1b4c-47ab-81a8-3718d8e9c222"
+    },
+    {
+      "page": 69,
+      "status": 200,
+      "cursor": "32a806e8-894e-41ad-a4d5-6d9154d7b1e6"
+    },
+    {
+      "page": 70,
+      "status": 200,
+      "cursor": "e97c3b37-1aa5-46af-afb7-9545086aaa92"
+    },
+    {
+      "page": 71,
+      "status": 200,
+      "cursor": "6304c635-6681-4f9e-85b6-a97f4d26461a"
+    },
+    {
+      "page": 72,
+      "status": 200,
+      "cursor": "56df0456-8f47-4f7a-ac26-40c2f9797104"
+    },
+    {
+      "page": 73,
+      "status": 200,
+      "cursor": "7f98e662-142d-41ba-89a2-12452640ce6d"
+    },
+    {
+      "page": 74,
+      "status": 200,
+      "cursor": "c63361f8-d142-4c62-8da7-8f8149d973d6"
+    }
+  ],
+  "availableVoiceCount": 732,
+  "resolved": [
+    {
+      "requestedName": "Adam",
+      "matchType": "missing",
+      "resolvedVoiceName": null,
+      "resolvedVoiceId": null,
+      "candidates": []
+    },
+    {
+      "requestedName": "Allie",
+      "matchType": "exact",
+      "resolvedVoiceName": "Allie - Natural Conversationalist",
+      "resolvedVoiceId": "2747b6cf-fa34-460c-97db-267566918881",
+      "candidates": [
+        {
+          "name": "Allie - Natural Conversationalist",
+          "id": "2747b6cf-fa34-460c-97db-267566918881"
+        }
+      ]
+    },
+    {
+      "requestedName": "Anna",
+      "matchType": "missing",
+      "resolvedVoiceName": null,
+      "resolvedVoiceId": null,
+      "candidates": []
+    },
+    {
+      "requestedName": "Brian",
+      "matchType": "missing",
+      "resolvedVoiceName": null,
+      "resolvedVoiceId": null,
+      "candidates": []
+    },
+    {
+      "requestedName": "Brooke",
+      "matchType": "exact",
+      "resolvedVoiceName": "Brooke - Big Sister",
+      "resolvedVoiceId": "e07c00bc-4134-4eae-9ea4-1a55fb45746b",
+      "candidates": [
+        {
+          "name": "Brooke - Big Sister",
+          "id": "e07c00bc-4134-4eae-9ea4-1a55fb45746b"
+        }
+      ]
+    },
+    {
+      "requestedName": "Dallas",
+      "matchType": "exact",
+      "resolvedVoiceName": "Dallas - Fireside Friend",
+      "resolvedVoiceId": "23e9e50a-4ea2-447b-b589-df90dbb848a2",
+      "candidates": [
+        {
+          "name": "Dallas - Fireside Friend",
+          "id": "23e9e50a-4ea2-447b-b589-df90dbb848a2"
+        }
+      ]
+    },
+    {
+      "requestedName": "Elena",
+      "matchType": "exact",
+      "resolvedVoiceName": "Elena - Narrator",
+      "resolvedVoiceId": "cefcb124-080b-4655-b31f-932f3ee743de",
+      "candidates": [
+        {
+          "name": "Elena - Narrator",
+          "id": "cefcb124-080b-4655-b31f-932f3ee743de"
+        }
+      ]
+    },
+    {
+      "requestedName": "Ellen",
+      "matchType": "exact",
+      "resolvedVoiceName": "Ellen - Welcome Agent",
+      "resolvedVoiceId": "5c9e800f-2a92-4720-969b-99c4ab8fbc87",
+      "candidates": [
+        {
+          "name": "Ellen - Welcome Agent",
+          "id": "5c9e800f-2a92-4720-969b-99c4ab8fbc87"
+        }
+      ]
+    },
+    {
+      "requestedName": "Ethan",
+      "matchType": "missing",
+      "resolvedVoiceName": null,
+      "resolvedVoiceId": null,
+      "candidates": []
+    },
+    {
+      "requestedName": "Eve",
+      "matchType": "missing",
+      "resolvedVoiceName": null,
+      "resolvedVoiceId": null,
+      "candidates": []
+    },
+    {
+      "requestedName": "Florence",
+      "matchType": "missing",
+      "resolvedVoiceName": null,
+      "resolvedVoiceId": null,
+      "candidates": []
+    },
+    {
+      "requestedName": "Holly",
+      "matchType": "exact",
+      "resolvedVoiceName": "Holly - Joyful Presence",
+      "resolvedVoiceId": "aef96ff9-4578-4b5d-9744-7fb347cbe4d4",
+      "candidates": [
+        {
+          "name": "Holly - Joyful Presence",
+          "id": "aef96ff9-4578-4b5d-9744-7fb347cbe4d4"
+        }
+      ]
+    },
+    {
+      "requestedName": "Jacqueline",
+      "matchType": "exact",
+      "resolvedVoiceName": "Jacqueline - Reassuring Agent",
+      "resolvedVoiceId": "9626c31c-bec5-4cca-baa8-f8ba9e84c8bc",
+      "candidates": [
+        {
+          "name": "Jacqueline - Reassuring Agent",
+          "id": "9626c31c-bec5-4cca-baa8-f8ba9e84c8bc"
+        }
+      ]
+    },
+    {
+      "requestedName": "Janelle",
+      "matchType": "missing",
+      "resolvedVoiceName": null,
+      "resolvedVoiceId": null,
+      "candidates": []
+    },
+    {
+      "requestedName": "Joan",
+      "matchType": "exact",
+      "resolvedVoiceName": "Joan - Messenger",
+      "resolvedVoiceId": "c9440d34-5641-427b-bbb7-80ef7462576d",
+      "candidates": [
+        {
+          "name": "Joan - Messenger",
+          "id": "c9440d34-5641-427b-bbb7-80ef7462576d"
+        }
+      ]
+    },
+    {
+      "requestedName": "Kathy",
+      "matchType": "missing",
+      "resolvedVoiceName": null,
+      "resolvedVoiceId": null,
+      "candidates": []
+    },
+    {
+      "requestedName": "Katie",
+      "matchType": "exact",
+      "resolvedVoiceName": "Katie - Friendly Fixer",
+      "resolvedVoiceId": "f786b574-daa5-4673-aa0c-cbe3e8534c02",
+      "candidates": [
+        {
+          "name": "Katie - Friendly Fixer",
+          "id": "f786b574-daa5-4673-aa0c-cbe3e8534c02"
+        }
+      ]
+    },
+    {
+      "requestedName": "Miguel",
+      "matchType": "missing",
+      "resolvedVoiceName": null,
+      "resolvedVoiceId": null,
+      "candidates": []
+    },
+    {
+      "requestedName": "Mike",
+      "matchType": "missing",
+      "resolvedVoiceName": null,
+      "resolvedVoiceId": null,
+      "candidates": []
+    },
+    {
+      "requestedName": "Nancy",
+      "matchType": "missing",
+      "resolvedVoiceName": null,
+      "resolvedVoiceId": null,
+      "candidates": []
+    },
+    {
+      "requestedName": "Pierre",
+      "matchType": "exact",
+      "resolvedVoiceName": "Pierre",
+      "resolvedVoiceId": "bfd5390b-e4f9-4e44-95ab-9ebd223acd62",
+      "candidates": [
+        {
+          "name": "Pierre",
+          "id": "bfd5390b-e4f9-4e44-95ab-9ebd223acd62"
+        },
+        {
+          "name": "Pierre - Baritone Storyteller",
+          "id": "56df0456-8f47-4f7a-ac26-40c2f9797104"
+        }
+      ]
+    },
+    {
+      "requestedName": "Sarah",
+      "matchType": "exact",
+      "resolvedVoiceName": "Sarah - Mindful Woman",
+      "resolvedVoiceId": "694f9389-aac1-45b6-b726-9d9369183238",
+      "candidates": [
+        {
+          "name": "Sarah - Mindful Woman",
+          "id": "694f9389-aac1-45b6-b726-9d9369183238"
+        }
+      ]
+    },
+    {
+      "requestedName": "Sofia",
+      "matchType": "exact",
+      "resolvedVoiceName": "Sofia - Methodical Moderator",
+      "resolvedVoiceId": "90c7d657-9599-4cd0-9ed2-2568359e4d1a",
+      "candidates": [
+        {
+          "name": "Sofia - Methodical Moderator",
+          "id": "90c7d657-9599-4cd0-9ed2-2568359e4d1a"
+        }
+      ]
+    },
+    {
+      "requestedName": "Summer",
+      "matchType": "missing",
+      "resolvedVoiceName": null,
+      "resolvedVoiceId": null,
+      "candidates": []
+    },
+    {
+      "requestedName": "Susan",
+      "matchType": "missing",
+      "resolvedVoiceName": null,
+      "resolvedVoiceId": null,
+      "candidates": []
+    },
+    {
+      "requestedName": "Suzanne",
+      "matchType": "exact",
+      "resolvedVoiceName": "Suzanne - Laidback Aunt",
+      "resolvedVoiceId": "8634bd27-0acf-4056-b014-4fea0385ed9e",
+      "candidates": [
+        {
+          "name": "Suzanne - Laidback Aunt",
+          "id": "8634bd27-0acf-4056-b014-4fea0385ed9e"
+        }
+      ]
+    }
+  ],
+  "missing": [
+    {
+      "requestedName": "Adam",
+      "matchType": "missing",
+      "resolvedVoiceName": null,
+      "resolvedVoiceId": null,
+      "candidates": []
+    },
+    {
+      "requestedName": "Anna",
+      "matchType": "missing",
+      "resolvedVoiceName": null,
+      "resolvedVoiceId": null,
+      "candidates": []
+    },
+    {
+      "requestedName": "Brian",
+      "matchType": "missing",
+      "resolvedVoiceName": null,
+      "resolvedVoiceId": null,
+      "candidates": []
+    },
+    {
+      "requestedName": "Ethan",
+      "matchType": "missing",
+      "resolvedVoiceName": null,
+      "resolvedVoiceId": null,
+      "candidates": []
+    },
+    {
+      "requestedName": "Eve",
+      "matchType": "missing",
+      "resolvedVoiceName": null,
+      "resolvedVoiceId": null,
+      "candidates": []
+    },
+    {
+      "requestedName": "Florence",
+      "matchType": "missing",
+      "resolvedVoiceName": null,
+      "resolvedVoiceId": null,
+      "candidates": []
+    },
+    {
+      "requestedName": "Janelle",
+      "matchType": "missing",
+      "resolvedVoiceName": null,
+      "resolvedVoiceId": null,
+      "candidates": []
+    },
+    {
+      "requestedName": "Kathy",
+      "matchType": "missing",
+      "resolvedVoiceName": null,
+      "resolvedVoiceId": null,
+      "candidates": []
+    },
+    {
+      "requestedName": "Miguel",
+      "matchType": "missing",
+      "resolvedVoiceName": null,
+      "resolvedVoiceId": null,
+      "candidates": []
+    },
+    {
+      "requestedName": "Mike",
+      "matchType": "missing",
+      "resolvedVoiceName": null,
+      "resolvedVoiceId": null,
+      "candidates": []
+    },
+    {
+      "requestedName": "Nancy",
+      "matchType": "missing",
+      "resolvedVoiceName": null,
+      "resolvedVoiceId": null,
+      "candidates": []
+    },
+    {
+      "requestedName": "Summer",
+      "matchType": "missing",
+      "resolvedVoiceName": null,
+      "resolvedVoiceId": null,
+      "candidates": []
+    },
+    {
+      "requestedName": "Susan",
+      "matchType": "missing",
+      "resolvedVoiceName": null,
+      "resolvedVoiceId": null,
+      "candidates": []
+    }
+  ],
+  "probes": [
+    {
+      "requestedName": "Adam",
+      "voiceId": null,
+      "status": "skipped_missing_voice"
+    },
+    {
+      "requestedName": "Allie",
+      "voiceId": "2747b6cf-fa34-460c-97db-267566918881",
+      "statusCode": 200,
+      "ok": true,
+      "bytes": 78458
+    },
+    {
+      "requestedName": "Anna",
+      "voiceId": null,
+      "status": "skipped_missing_voice"
+    },
+    {
+      "requestedName": "Brian",
+      "voiceId": null,
+      "status": "skipped_missing_voice"
+    },
+    {
+      "requestedName": "Brooke",
+      "voiceId": "e07c00bc-4134-4eae-9ea4-1a55fb45746b",
+      "statusCode": 200,
+      "ok": true,
+      "bytes": 74000
+    },
+    {
+      "requestedName": "Dallas",
+      "voiceId": "23e9e50a-4ea2-447b-b589-df90dbb848a2",
+      "statusCode": 200,
+      "ok": true,
+      "bytes": 102978
+    },
+    {
+      "requestedName": "Elena",
+      "voiceId": "cefcb124-080b-4655-b31f-932f3ee743de",
+      "statusCode": 200,
+      "ok": true,
+      "bytes": 82916
+    },
+    {
+      "requestedName": "Ellen",
+      "voiceId": "5c9e800f-2a92-4720-969b-99c4ab8fbc87",
+      "statusCode": 200,
+      "ok": true,
+      "bytes": 105208
+    },
+    {
+      "requestedName": "Ethan",
+      "voiceId": null,
+      "status": "skipped_missing_voice"
+    },
+    {
+      "requestedName": "Eve",
+      "voiceId": null,
+      "status": "skipped_missing_voice"
+    },
+    {
+      "requestedName": "Florence",
+      "voiceId": null,
+      "status": "skipped_missing_voice"
+    },
+    {
+      "requestedName": "Holly",
+      "voiceId": "aef96ff9-4578-4b5d-9744-7fb347cbe4d4",
+      "statusCode": 200,
+      "ok": true,
+      "bytes": 158706
+    },
+    {
+      "requestedName": "Jacqueline",
+      "voiceId": "9626c31c-bec5-4cca-baa8-f8ba9e84c8bc",
+      "statusCode": 200,
+      "ok": true,
+      "bytes": 123040
+    },
+    {
+      "requestedName": "Janelle",
+      "voiceId": null,
+      "status": "skipped_missing_voice"
+    },
+    {
+      "requestedName": "Joan",
+      "voiceId": "c9440d34-5641-427b-bbb7-80ef7462576d",
+      "statusCode": 200,
+      "ok": true,
+      "bytes": 107436
+    },
+    {
+      "requestedName": "Kathy",
+      "voiceId": null,
+      "status": "skipped_missing_voice"
+    },
+    {
+      "requestedName": "Katie",
+      "voiceId": "f786b574-daa5-4673-aa0c-cbe3e8534c02",
+      "statusCode": 200,
+      "ok": true,
+      "bytes": 76230
+    },
+    {
+      "requestedName": "Miguel",
+      "voiceId": null,
+      "status": "skipped_missing_voice"
+    },
+    {
+      "requestedName": "Mike",
+      "voiceId": null,
+      "status": "skipped_missing_voice"
+    },
+    {
+      "requestedName": "Nancy",
+      "voiceId": null,
+      "status": "skipped_missing_voice"
+    },
+    {
+      "requestedName": "Pierre",
+      "voiceId": "bfd5390b-e4f9-4e44-95ab-9ebd223acd62",
+      "statusCode": 200,
+      "ok": true,
+      "bytes": 111896
+    },
+    {
+      "requestedName": "Sarah",
+      "voiceId": "694f9389-aac1-45b6-b726-9d9369183238",
+      "statusCode": 200,
+      "ok": true,
+      "bytes": 89604
+    },
+    {
+      "requestedName": "Sofia",
+      "voiceId": "90c7d657-9599-4cd0-9ed2-2568359e4d1a",
+      "statusCode": 200,
+      "ok": true,
+      "bytes": 102978
+    },
+    {
+      "requestedName": "Summer",
+      "voiceId": null,
+      "status": "skipped_missing_voice"
+    },
+    {
+      "requestedName": "Susan",
+      "voiceId": null,
+      "status": "skipped_missing_voice"
+    },
+    {
+      "requestedName": "Suzanne",
+      "voiceId": "8634bd27-0acf-4056-b014-4fea0385ed9e",
+      "statusCode": 200,
+      "ok": true,
+      "bytes": 145332
+    }
+  ],
+  "upserted": [
+    {
+      "id": "e8002064-9458-4238-b1da-75b689e71120",
+      "name": "Allie",
+      "provider": "cartesia",
+      "cartesia_voice_id": "2747b6cf-fa34-460c-97db-267566918881",
+      "active": true
+    },
+    {
+      "id": "9c9e6016-7fc5-4707-a5ba-0f6aa72af358",
+      "name": "Brooke",
+      "provider": "cartesia",
+      "cartesia_voice_id": "e07c00bc-4134-4eae-9ea4-1a55fb45746b",
+      "active": true
+    },
+    {
+      "id": "c48ba792-faa4-429d-9bdc-097e4a25067b",
+      "name": "Dallas",
+      "provider": "cartesia",
+      "cartesia_voice_id": "23e9e50a-4ea2-447b-b589-df90dbb848a2",
+      "active": true
+    },
+    {
+      "id": "73ae61d4-35cd-49fa-829f-1abda5e07ace",
+      "name": "Elena",
+      "provider": "cartesia",
+      "cartesia_voice_id": "cefcb124-080b-4655-b31f-932f3ee743de",
+      "active": true
+    },
+    {
+      "id": "fb9eb97d-c59b-4cb7-bb8e-fefbff591bc1",
+      "name": "Ellen",
+      "provider": "cartesia",
+      "cartesia_voice_id": "5c9e800f-2a92-4720-969b-99c4ab8fbc87",
+      "active": true
+    },
+    {
+      "id": "cf96aba3-2b61-4061-829d-5fd7cf867c13",
+      "name": "Holly",
+      "provider": "cartesia",
+      "cartesia_voice_id": "aef96ff9-4578-4b5d-9744-7fb347cbe4d4",
+      "active": true
+    },
+    {
+      "id": "015099fe-dcbe-4d8c-ab17-71752a35715c",
+      "name": "Jacqueline",
+      "provider": "cartesia",
+      "cartesia_voice_id": "9626c31c-bec5-4cca-baa8-f8ba9e84c8bc",
+      "active": true
+    },
+    {
+      "id": "dc190449-45b3-4b75-9d86-796c475b9fa5",
+      "name": "Joan",
+      "provider": "cartesia",
+      "cartesia_voice_id": "c9440d34-5641-427b-bbb7-80ef7462576d",
+      "active": true
+    },
+    {
+      "id": "0b6e675c-9383-4076-87e8-5fc5ed0e21e7",
+      "name": "Katie",
+      "provider": "cartesia",
+      "cartesia_voice_id": "f786b574-daa5-4673-aa0c-cbe3e8534c02",
+      "active": true
+    },
+    {
+      "id": "61785c9d-f2e9-4c63-922f-7985d897028a",
+      "name": "Pierre",
+      "provider": "cartesia",
+      "cartesia_voice_id": "bfd5390b-e4f9-4e44-95ab-9ebd223acd62",
+      "active": true
+    },
+    {
+      "id": "8bacbca2-0fa6-437f-8149-4824105ebf73",
+      "name": "Sarah",
+      "provider": "cartesia",
+      "cartesia_voice_id": "694f9389-aac1-45b6-b726-9d9369183238",
+      "active": true
+    },
+    {
+      "id": "930522bf-8f5e-4dd3-8a7a-c4be0a2f781b",
+      "name": "Sofia",
+      "provider": "cartesia",
+      "cartesia_voice_id": "90c7d657-9599-4cd0-9ed2-2568359e4d1a",
+      "active": true
+    },
+    {
+      "id": "6860411f-f182-4c72-a8f3-4b9332bce1d4",
+      "name": "Suzanne",
+      "provider": "cartesia",
+      "cartesia_voice_id": "8634bd27-0acf-4056-b014-4fea0385ed9e",
+      "active": true
+    }
+  ],
+  "deactivated": [],
+  "failures": []
+}
