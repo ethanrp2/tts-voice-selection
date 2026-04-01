@@ -6,6 +6,7 @@ interface VoiceCardProps {
   variant: "a" | "b";
   isPlaying: boolean;
   isLoading: boolean;
+  flagged?: boolean;
   onPlay: () => void;
   onFlag: () => void;
 }
@@ -16,6 +17,7 @@ export function VoiceCard({
   variant,
   isPlaying,
   isLoading,
+  flagged,
   onPlay,
   onFlag,
 }: VoiceCardProps) {
@@ -27,7 +29,7 @@ export function VoiceCard({
   const displayName = name.split(/\s(?:-|–|—|\||\().*/)[0].trim() || name;
 
   return (
-    <div className="group bg-surface-container-low rounded-xl p-3 border border-white/5 relative flex flex-col gap-2 overflow-hidden min-h-0 h-full">
+    <div className={`group bg-surface-container-low rounded-xl p-3 border relative flex flex-col gap-2 overflow-hidden min-h-0 h-full transition-colors duration-150 ${flagged ? "border-red-500/60" : "border-white/5"}`}>
       <div className="min-w-0">
         <span className="text-[10px] font-label text-outline uppercase tracking-widest block mb-0.5">
           {label}
