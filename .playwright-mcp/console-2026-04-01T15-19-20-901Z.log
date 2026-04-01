@@ -1,0 +1,126 @@
+[     102ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[     115ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[     135ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <ScrollAndMaybeFocusHandler cacheNode={{rsc:{...}, ...}}>
+      <InnerScrollAndFocusHandlerOld focusAndScrollRef={{scrollRef:null, ...}} cacheNode={{rsc:{...}, ...}}>
+        <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+          <LoadingBoundary name="/" loading={null}>
+            <HTTPAccessFallbackBoundary notFound={{...}} forbidden={undefined} unauthorized={undefined}>
+              <HTTPAccessFallbackErrorBoundary pathname="/" notFound={{...}} forbidden={undefined} ...>
+                <RedirectBoundary>
+                  <RedirectErrorBoundary router={{...}}>
+                    <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
+                      <SegmentViewNode type="page" pagePath="page.tsx">
+                        <SegmentTrieNode>
+                        <ClientPageRoot Component={function VotePage} serverProvidedParams={{...}}>
+                          <VotePage params={Promise} searchParams={Promise}>
+                            <div className="h-dvh flex...">
+                              <Header>
+                                <header className="bg-surface...">
+                                  <div
++                                   className="flex items-center justify-between w-full px-6 py-3 max-w-screen-xl mx-auto"
+-                                   className="flex items-center justify-between w-full px-6 py-4 max-w-screen-xl mx-auto"
+                                  >
+                              <main
++                               className="flex-1 min-h-0 flex flex-col items-center justify-start px-4 py-2 gap-3"
+-                               className="flex-1 flex flex-col items-center justify-start px-4 py-2 overflow-hidden g..."
+                              >
+                                <section className="w-full max...">
+                                  <span>
+                                  <h1
++                                   className="text-lg font-headline font-extrabold tracking-tight text-on-surface lea..."
+-                                   className="text-lg md:text-3xl font-headline font-extrabold tracking-tight text-on..."
+                                  >
+                                <div
++                                 className="grid grid-cols-2 gap-3 w-full max-w-xl max-h-[35vh] overflow-hidden"
+-                                 className="grid grid-cols-2 gap-3 w-full max-w-xl shrink-0"
+                                >
+                                  <VoiceCard label="Profile A" name="Voice A" variant="a" isPlaying={false} ...>
+                                    <div
++                                     className="group bg-surface-container-low rounded-xl p-3 border border-white/5 r..."
+-                                     className="group bg-surface-container-low rounded-xl p-3 border border-white/5 r..."
+                                    >
+                                      <div
++                                       className="min-w-0"
+-                                       className={null}
+                                      >
+                                        <span>
+                                        <h2
++                                         className="text-sm font-headline font-bold text-on-surface truncate"
+-                                         className="text-lg font-headline font-bold text-on-surface"
+                                        >
++                                         Voice A
+                                      <div
++                                       className="flex justify-center items-center flex-1 min-h-0"
+-                                       className="flex justify-center items-center flex-1 py-2"
+                                      >
+                                        <button
+                                          onClick={function onPlay}
+                                          disabled={false}
++                                         className="w-14 h-14 rounded-full bg-[#d095ff] flex items-center justify-cen..."
+-                                         className="w-16 h-16 rounded-full bg-[#d095ff] flex items-center justify-cen..."
+                                        >
+                                      <div>
+                                      <button
+                                        onClick={function onFlag}
++                                       className="mt-1 flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-l..."
+-                                       className="mt-3 flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-l..."
+                                      >
+                                  <VoiceCard label="Profile B" name="Voice B" variant="b" isPlaying={false} ...>
+                                    <div
++                                     className="group bg-surface-container-low rounded-xl p-3 border border-white/5 r..."
+-                                     className="group bg-surface-container-low rounded-xl p-3 border border-white/5 r..."
+                                    >
+                                      <div
++                                       className="min-w-0"
+-                                       className={null}
+                                      >
+                                        <span>
+                                        <h2
++                                         className="text-sm font-headline font-bold text-on-surface truncate"
+-                                         className="text-lg font-headline font-bold text-on-surface"
+                                        >
++                                         Voice B
+                                      <div
++                                       className="flex justify-center items-center flex-1 min-h-0"
+-                                       className="flex justify-center items-center flex-1 py-2"
+                                      >
+                                        <button
+                                          onClick={function onPlay}
+                                          disabled={false}
++                                         className="w-14 h-14 rounded-full bg-accent-cyan flex items-center justify-c..."
+-                                         className="w-16 h-16 rounded-full bg-accent-cyan flex items-center justify-c..."
+                                        >
+                                      <div>
+                                      <button
+                                        onClick={function onFlag}
++                                       className="mt-1 flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-l..."
+-                                       className="mt-3 flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-l..."
+                                      >
+                                <div
++                                 className="w-full max-w-xl space-y-3 pb-3 shrink-0"
+-                                 className="w-full max-w-xl space-y-3 shrink-0 pb-3"
+                                >
+                              <BottomNav>
+                                <nav
++                                 className="shrink-0 w-full flex justify-around items-center pt-3 pb-[max(1rem,env(sa..."
+-                                 className="shrink-0 w-full flex justify-around items-center pt-3 pb-8 px-12 bg-[#131..."
+                                >
+                      ...
+                    ...
+        ...
+ @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:3272
+[  119311ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[  119383ms] [LOG] [Fast Refresh] done in 173ms @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431

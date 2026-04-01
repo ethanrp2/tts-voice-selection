@@ -9,7 +9,7 @@ export function BottomNav() {
   const isLeaderboard = pathname === "/leaderboard";
 
   return (
-    <nav className="shrink-0 w-full flex justify-around items-center pt-3 pb-8 px-12 bg-[#131313]/70 backdrop-blur-xl border-t border-white/5 shadow-[0_-4px_40px_rgba(0,0,0,0.4)]">
+    <nav className="shrink-0 w-full flex justify-around items-center pt-3 pb-[max(1rem,env(safe-area-inset-bottom))] px-12 bg-[#131313]/70 backdrop-blur-xl border-t border-white/5 shadow-[0_-4px_40px_rgba(0,0,0,0.4)]">
       <Link
         href="/"
         className={`flex flex-col items-center justify-center gap-1 transition-colors active:scale-90 duration-300 relative ${

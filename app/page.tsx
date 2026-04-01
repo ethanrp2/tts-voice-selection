@@ -113,13 +113,13 @@ export default function VotePage() {
     <div className="h-dvh flex flex-col bg-surface overflow-hidden">
       <Header />
 
-      <main className="flex-1 flex flex-col items-center justify-center px-4 py-2 overflow-hidden gap-4">
+      <main className="flex-1 min-h-0 flex flex-col items-center justify-start px-4 py-2 gap-3">
         {/* Test Phrase Section */}
         <section className="w-full max-w-2xl text-center shrink-0">
           <span className="text-[10px] uppercase tracking-[0.2em] text-outline mb-1 block font-label opacity-60">
             Test Phrase
           </span>
-          <h1 className="text-xl md:text-3xl font-headline font-extrabold tracking-tight text-on-surface leading-snug px-2">
+          <h1 className="text-lg font-headline font-extrabold tracking-tight text-on-surface leading-snug px-2">
             {loading ? (
               <span className="text-on-surface-variant">Loading...</span>
             ) : (
@@ -129,7 +129,7 @@ export default function VotePage() {
         </section>
 
         {/* Voice Comparison Cards - Side by Side */}
-        <div className="grid grid-cols-2 gap-3 w-full max-w-xl shrink-0">
+        <div className="grid grid-cols-2 gap-3 w-full max-w-xl max-h-[35vh] overflow-hidden">
           <VoiceCard
             label="Profile A"
             name={matchup?.voiceA.name || "Voice A"}
@@ -155,7 +155,7 @@ export default function VotePage() {
         </div>
 
         {/* Vote Toggles */}
-        <div className="w-full max-w-xl space-y-3 shrink-0">
+        <div className="w-full max-w-xl space-y-3 pb-3 shrink-0">
           <VoteRow
             category="Empathy"
             selected={votes.empathy}

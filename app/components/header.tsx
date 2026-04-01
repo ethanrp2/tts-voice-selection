@@ -3,7 +3,7 @@ import Link from "next/link";
 export function Header({ showDesktopNav }: { showDesktopNav?: boolean }) {
   return (
     <header className="bg-surface shrink-0">
-      <div className="flex items-center justify-between w-full px-6 py-4 max-w-screen-xl mx-auto">
+      <div className="flex items-center justify-between w-full px-6 py-3 max-w-screen-xl mx-auto">
         <div className="flex items-center gap-3">
           <span className="material-symbols-outlined text-accent-cyan text-3xl">
             graphic_eq

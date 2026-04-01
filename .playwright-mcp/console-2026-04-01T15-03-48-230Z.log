@@ -1,0 +1,79 @@
+[     157ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[     173ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[     195ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <ScrollAndMaybeFocusHandler cacheNode={{rsc:{...}, ...}}>
+      <InnerScrollAndFocusHandlerOld focusAndScrollRef={{scrollRef:null, ...}} cacheNode={{rsc:{...}, ...}}>
+        <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+          <LoadingBoundary name="/" loading={null}>
+            <HTTPAccessFallbackBoundary notFound={{...}} forbidden={undefined} unauthorized={undefined}>
+              <HTTPAccessFallbackErrorBoundary pathname="/" notFound={{...}} forbidden={undefined} ...>
+                <RedirectBoundary>
+                  <RedirectErrorBoundary router={{...}}>
+                    <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
+                      <SegmentViewNode type="page" pagePath="page.tsx">
+                        <SegmentTrieNode>
+                        <ClientPageRoot Component={function VotePage} serverProvidedParams={{...}}>
+                          <VotePage params={Promise} searchParams={Promise}>
+                            <div className="h-dvh flex...">
+                              <Header>
+                              <main
++                               className="flex-1 flex flex-col items-center justify-start px-4 py-2 overflow-hidden g..."
+-                               className="flex-1 flex flex-col items-center justify-center px-4 py-2 overflow-hidden ..."
+                              >
+                                <section className="w-full max...">
+                                  <span>
+                                  <h1
++                                   className="text-lg md:text-3xl font-headline font-extrabold tracking-tight text-on..."
+-                                   className="text-xl md:text-3xl font-headline font-extrabold tracking-tight text-on..."
+                                  >
+                                <div className="grid grid-...">
+                                  <VoiceCard label="Profile A" name="Voice A" variant="a" isPlaying={false} ...>
+                                    <div
++                                     className="group bg-surface-container-low rounded-xl p-4 border border-white/5 r..."
+-                                     className="group bg-surface-container-low rounded-xl p-4 border border-white/5 r..."
+                                    >
+                                  <VoiceCard label="Profile B" name="Voice B" variant="b" isPlaying={false} ...>
+                                    <div
++                                     className="group bg-surface-container-low rounded-xl p-4 border border-white/5 r..."
+-                                     className="group bg-surface-container-low rounded-xl p-4 border border-white/5 r..."
+                                    >
+                                <div
++                                 className="w-full max-w-xl space-y-3 shrink-0 pb-3"
+-                                 className="w-full max-w-xl space-y-3 shrink-0 pb-4"
+                                >
+                              ...
+                      ...
+                    ...
+        ...
+ @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:3272
+[     573ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/api/matchup:0
+[  107485ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=Xn9Caa-eTb1CRrfZfMu-F' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/11y7_next_dist_client_05xkkjc._.js:13299
+[  108487ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=Xn9Caa-eTb1CRrfZfMu-F' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/11y7_next_dist_client_05xkkjc._.js:13299
+[  109491ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[  109803ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[  109816ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[  109951ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[  109955ms] [LOG] [Fast Refresh] done in 105ms @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[  110139ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/api/matchup:0
+[  424342ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[  424675ms] [LOG] [Fast Refresh] done in 408ms @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[  440021ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=l0ZB3_76PqdxTDFxV9GVm' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/11y7_next_dist_client_05xkkjc._.js:13299
+[  441023ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=l0ZB3_76PqdxTDFxV9GVm' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/11y7_next_dist_client_05xkkjc._.js:13299
+[  442027ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[  442425ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[  442443ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[  442864ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/api/matchup:0
+[  453627ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431
+[  453875ms] [LOG] [Fast Refresh] done in 322ms @ http://localhost:3000/_next/static/chunks/11y7_next_dist_0bi0ewc._.js:2431

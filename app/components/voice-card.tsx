@@ -36,20 +36,20 @@ export function VoiceCard({
       : [30, 20, 50, 70, 40, 60, 80, 45, 55, 35];
 
   return (
-    <div className="group bg-surface-container-low rounded-xl p-4 border border-white/5 relative flex flex-col justify-between aspect-[4/5] md:aspect-auto">
-      <div>
+    <div className="group bg-surface-container-low rounded-xl p-3 border border-white/5 relative flex flex-col gap-1 overflow-hidden min-h-0">
+      <div className="min-w-0">
         <span className="text-[10px] font-label text-outline uppercase tracking-widest block mb-0.5">
           {label}
         </span>
-        <h2 className="text-lg font-headline font-bold text-on-surface">
+        <h2 className="text-sm font-headline font-bold text-on-surface truncate">
           {name}
         </h2>
       </div>
-      <div className="flex justify-center items-center flex-1 py-2">
+      <div className="flex justify-center items-center flex-1 min-h-0">
         <button
           onClick={onPlay}
           disabled={isLoading}
-          className={`w-16 h-16 rounded-full ${bgClass} flex items-center justify-center text-black active:scale-95 transition-transform ${glowShadow} disabled:opacity-50`}
+          className={`w-14 h-14 rounded-full ${bgClass} flex items-center justify-center text-black active:scale-95 transition-transform ${glowShadow} disabled:opacity-50`}
         >
           <span
             className="material-symbols-outlined text-4xl"
@@ -75,7 +75,7 @@ export function VoiceCard({
       {/* Bad Voice Flag Button */}
       <button
         onClick={onFlag}
-        className="mt-3 flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg border border-red-900/40 text-red-400/60 text-[10px] font-bold uppercase tracking-wider hover:bg-red-500/10 transition-colors w-full"
+        className="mt-1 flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg border border-red-900/40 text-red-400/60 text-[10px] font-bold uppercase tracking-wider hover:bg-red-500/10 transition-colors w-full"
       >
         <span className="material-symbols-outlined text-sm">flag</span>
         Bad Voice
