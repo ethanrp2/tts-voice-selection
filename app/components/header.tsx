@@ -12,22 +12,45 @@ export function Header({ showDesktopNav }: { showDesktopNav?: boolean }) {
             VOICE ARENA
           </span>
         </div>
-        {showDesktopNav && (
-          <div className="hidden md:flex gap-8 items-center font-headline font-bold tracking-tight uppercase">
-            <Link
-              href="/"
-              className="text-gray-500 hover:opacity-80 transition-opacity active:scale-95 duration-200"
-            >
-              Vote
-            </Link>
-            <Link
-              href="/leaderboard"
-              className="text-accent-cyan hover:opacity-80 transition-opacity active:scale-95 duration-200"
-            >
-              Leaderboard
-            </Link>
+        <div className="flex items-center gap-6">
+          {showDesktopNav && (
+            <div className="hidden md:flex gap-8 items-center font-headline font-bold tracking-tight uppercase">
+              <Link
+                href="/"
+                className="text-gray-500 hover:opacity-80 transition-opacity active:scale-95 duration-200"
+              >
+                Vote
+              </Link>
+              <Link
+                href="/leaderboard"
+                className="text-accent-cyan hover:opacity-80 transition-opacity active:scale-95 duration-200"
+              >
+                Leaderboard
+              </Link>
+            </div>
+          )}
+          <div className="relative group">
+            <span className="material-symbols-outlined text-white/40 text-xl cursor-default select-none hover:text-white/70 transition-colors">
+              info
+            </span>
+            <div className="pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200 absolute top-full right-0 mt-2 w-72 bg-[#1a1a1a] border border-white/10 rounded-lg p-4 z-50 shadow-xl">
+              <p className="text-xs font-bold text-white mb-2">About Voice Arena</p>
+              <p className="text-[11px] text-white/60 leading-relaxed mb-2">
+                Built by <span className="text-white/80 font-medium">Ethan Pereira</span> &{" "}
+                <span className="text-white/80 font-medium">Kushika Sivaprakasam</span>
+              </p>
+              <p className="text-[11px] text-white/60 leading-relaxed mb-2">
+                We&apos;re collecting preference data on AI voices to help AEs and FDEs pick the
+                right voice for their customer&apos;s vibe and use case.
+              </p>
+              <p className="text-[11px] text-white/60 leading-relaxed">
+                <span className="text-white/80 font-medium">Goal:</span> Evaluate the current voice
+                library, define what matters when selecting a voice, and recommend what to keep, cut,
+                and add. The output is a scoring rubric and a mapping of each voice against it.
+              </p>
+            </div>
           </div>
-        )}
+        </div>
       </div>
     </header>
   );

@@ -15,6 +15,7 @@ interface Matchup {
 }
 
 type Votes = {
+  appeal: "a" | "b" | null;
   empathy: "a" | "b" | null;
   authority: "a" | "b" | null;
   energy: "a" | "b" | null;
@@ -23,6 +24,7 @@ type Votes = {
 export default function VotePage() {
   const [matchup, setMatchup] = useState<Matchup | null>(null);
   const [votes, setVotes] = useState<Votes>({
+    appeal: null,
     empathy: null,
     authority: null,
     energy: null,
@@ -50,7 +52,7 @@ export default function VotePage() {
       if (res.ok) {
         const data: Matchup = await res.json();
         setMatchup(data);
-        setVotes({ empathy: null, authority: null, energy: null });
+        setVotes({ appeal: null, empathy: null, authority: null, energy: null });
         prefetchAudio(data.voiceA.id, data.phrase);
         prefetchAudio(data.voiceB.id, data.phrase);
       }
@@ -74,7 +76,7 @@ export default function VotePage() {
 
   // Auto-advance when all 3 votes are cast
   useEffect(() => {
-    const allVoted = votes.empathy && votes.authority && votes.energy;
+    const allVoted = votes.appeal && votes.empathy && votes.authority && votes.energy;
     if (!allVoted || !matchup || submittingRef.current) return;
 
     submittingRef.current = true;
@@ -89,6 +91,7 @@ export default function VotePage() {
           body: JSON.stringify({
             matchupId: matchup.matchupId,
             votes: {
+              appeal: votes.appeal!,
               empathy: votes.empathy!,
               authority: votes.authority!,
               energy: votes.energy!,
@@ -200,7 +203,12 @@ export default function VotePage() {
           </div>
 
           {/* Vote Toggles */}
-          <div className="w-full max-w-xl space-y-3 pb-4 shrink-0">
+          <div className="w-full max-w-xl space-y-2 pb-2 shrink-0">
+            <VoteRow
+              category="Appeal"
+              selected={votes.appeal}
+              onSelect={(c) => setVotes((v) => ({ ...v, appeal: c }))}
+            />
             <VoteRow
               category="Empathy"
               selected={votes.empathy}

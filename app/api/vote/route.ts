@@ -4,6 +4,7 @@ import { calculateElo } from "@/lib/elo";
 interface VoteBody {
   matchupId: string;
   votes: {
+    appeal: "a" | "b";
     empathy: "a" | "b";
     authority: "a" | "b";
     energy: "a" | "b";
@@ -14,7 +15,7 @@ export async function POST(request: Request) {
   const body: VoteBody = await request.json();
   const { matchupId, votes } = body;
 
-  if (!matchupId || !votes?.empathy || !votes?.authority || !votes?.energy) {
+  if (!matchupId || !votes?.appeal || !votes?.empathy || !votes?.authority || !votes?.energy) {
     return Response.json({ error: "Missing required fields" }, { status: 400 });
   }
 
@@ -34,7 +35,7 @@ export async function POST(request: Request) {
   const { voice_a_id, voice_b_id } = matchup;
 
   // Insert votes for each category
-  const categories = ["empathy", "authority", "energy"] as const;
+  const categories = ["appeal", "empathy", "authority", "energy"] as const;
   for (const category of categories) {
     const { error } = await supabase.from("votes").insert({
       matchup_id: matchupId,
@@ -98,54 +99,6 @@ export async function POST(request: Request) {
       })
       .eq("voice_id", voice_b_id)
       .eq("category", category);
-  }
-
-  // Overall ELO: majority winner of the 3 categories
-  const aWins = categories.filter((c) => votes[c] === "a").length;
-  const overallWinner: "a" | "b" = aWins >= 2 ? "a" : "b";
-
-  const { data: overallA } = await supabase
-    .from("elo_ratings")
-    .select("rating, match_count, win_count")
-    .eq("voice_id", voice_a_id)
-    .eq("category", "overall")
-    .single();
-
-  const { data: overallB } = await supabase
-    .from("elo_ratings")
-    .select("rating, match_count, win_count")
-    .eq("voice_id", voice_b_id)
-    .eq("category", "overall")
-    .single();
-
-  if (overallA && overallB) {
-    const [newOverallA, newOverallB] = calculateElo(
-      overallA.rating,
-      overallB.rating,
-      overallWinner
-    );
-
-    await supabase
-      .from("elo_ratings")
-      .update({
-        rating: newOverallA,
-        match_count: overallA.match_count + 1,
-        win_count: overallA.win_count + (overallWinner === "a" ? 1 : 0),
-        updated_at: new Date().toISOString(),
-      })
-      .eq("voice_id", voice_a_id)
-      .eq("category", "overall");
-
-    await supabase
-      .from("elo_ratings")
-      .update({
-        rating: newOverallB,
-        match_count: overallB.match_count + 1,
-        win_count: overallB.win_count + (overallWinner === "b" ? 1 : 0),
-        updated_at: new Date().toISOString(),
-      })
-      .eq("voice_id", voice_b_id)
-      .eq("category", "overall");
   }
 
   return Response.json({ success: true });

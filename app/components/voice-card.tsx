@@ -58,7 +58,7 @@ export function VoiceCard({
         className="mt-auto flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg border border-red-900/40 text-red-400/60 text-[10px] font-bold uppercase tracking-wider hover:bg-red-500/10 transition-colors w-full"
       >
         <span className="material-symbols-outlined text-sm">flag</span>
-        Bad Voice
+        Sounds Robotic
       </button>
     </div>
   );

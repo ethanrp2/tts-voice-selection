@@ -84,13 +84,13 @@ export async function POST(request: Request) {
       body: JSON.stringify({
         text,
         speaker: rimeSpeaker,
-        modelId: "mistv2",
+        modelId: "mistv3",
         lang: "eng",
       }),
     });
   } else if (provider === "elevenlabs") {
     const apiKey = process.env.ELEVENLABS_API_KEY;
-    const modelId = process.env.ELEVENLABS_MODEL_ID || "eleven_v3";
+    const modelId = "eleven_turbo_v2";
 
     if (!apiKey) {
       return Response.json(

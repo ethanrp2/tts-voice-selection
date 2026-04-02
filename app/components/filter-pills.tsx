@@ -1,6 +1,6 @@
 "use client";
 
-const CATEGORIES = ["empathy", "authority", "energy"] as const;
+const CATEGORIES = ["appeal", "empathy", "authority", "energy"] as const;
 
 interface FilterPillsProps {
   selected: string;

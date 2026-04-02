@@ -1,8 +1,21 @@
 import { createServerClient } from "@/lib/supabase";
 import type { NextRequest } from "next/server";
 
+function modelForProvider(provider: string | null | undefined) {
+  switch ((provider || "").toLowerCase()) {
+    case "elevenlabs":
+      return "eleven_turbo_v2";
+    case "cartesia":
+      return "sonic-3";
+    case "rime":
+      return "mistv3";
+    default:
+      return "";
+  }
+}
+
 export async function GET(request: NextRequest) {
-  const category = request.nextUrl.searchParams.get("category") || "overall";
+  const category = request.nextUrl.searchParams.get("category") || "appeal";
   const limit = parseInt(
     request.nextUrl.searchParams.get("limit") || "20",
     10
@@ -12,7 +25,7 @@ export async function GET(request: NextRequest) {
     10
   );
 
-  const validCategories = ["overall", "empathy", "authority", "energy"];
+  const validCategories = ["appeal", "empathy", "authority", "energy"];
   if (!validCategories.includes(category)) {
     return Response.json({ error: "Invalid category" }, { status: 400 });
   }
@@ -56,7 +69,7 @@ export async function GET(request: NextRequest) {
       id: voice.id,
       name: voice.name,
       provider: voice.provider,
-      description: voice.description,
+      description: modelForProvider(voice.provider),
       rating: entry.rating,
       matchCount: entry.match_count,
       winCount: entry.win_count,

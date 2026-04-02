@@ -32,7 +32,7 @@ const REQUESTED_VOICES = [
   "Suzanne",
 ];
 
-const ELO_CATEGORIES = ["overall", "empathy", "authority", "energy"];
+const ELO_CATEGORIES = ["appeal", "empathy", "authority", "energy"];
 const REPORT_PATH = path.join("reports", "cartesia-voice-sync-report.json");
 const CARTESIA_API_BASE = "https://api.cartesia.ai";
 const CARTESIA_VERSION = "2025-04-16";

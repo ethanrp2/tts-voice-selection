@@ -20,6 +20,16 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Reset App State
+
+To reset the app data back to baseline in Supabase (delete all `votes` and reset all `elo_ratings` to default), run:
+
+```bash
+pnpm reset:app-state
+```
+
+It will print a small before/after summary so you can confirm the reset happened.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
@@ -39,7 +49,6 @@ Set these Environment Variables in Vercel for both `Preview` and `Production` be
 - `CARTESIA_API_KEY`
 - `RIME_API_KEY`
 - `ELEVENLABS_API_KEY`
-- `ELEVENLABS_MODEL_ID` (optional, defaults to `eleven_v3`)
 
 Important:
 - `NEXT_PUBLIC_*` values are inlined at build time, so changing them requires a redeploy.

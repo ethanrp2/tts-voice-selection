@@ -39,7 +39,7 @@ const REQUESTED_VOICES = [
   "Wayne",
 ];
 
-const ELO_CATEGORIES = ["overall", "empathy", "authority", "energy"];
+const ELO_CATEGORIES = ["appeal", "empathy", "authority", "energy"];
 const FALLBACK_MODEL_ID = "eleven_v3";
 const REPORT_PATH = path.join("reports", "elevenlabs-voice-sync-report.json");
 
