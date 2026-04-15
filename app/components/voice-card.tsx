@@ -7,6 +7,7 @@ interface VoiceCardProps {
   isPlaying: boolean;
   isLoading: boolean;
   flagged?: boolean;
+  feedback?: "correct" | "incorrect" | null;
   onPlay: () => void;
   onFlag: () => void;
 }
@@ -18,6 +19,7 @@ export function VoiceCard({
   isPlaying,
   isLoading,
   flagged,
+  feedback,
   onPlay,
   onFlag,
 }: VoiceCardProps) {
@@ -29,7 +31,17 @@ export function VoiceCard({
   const displayName = name.split(/\s(?:-|–|—|\||\().*/)[0].trim() || name;
 
   return (
-    <div className={`group bg-surface-container-low rounded-xl p-3 border relative flex flex-col gap-2 overflow-hidden min-h-0 h-full transition-colors duration-150 ${flagged ? "border-red-500/60" : "border-white/5"}`}>
+    <div
+      className={`group bg-surface-container-low rounded-xl p-4 border-2 relative flex flex-col gap-2 overflow-hidden min-h-0 h-full transition-all duration-300 ${
+        feedback === "correct"
+          ? "border-green-400 shadow-[0_0_20px_rgba(74,222,128,0.5)]"
+          : feedback === "incorrect"
+          ? "border-red-400 shadow-[0_0_20px_rgba(248,113,113,0.5)]"
+          : flagged
+          ? "border-red-500/60"
+          : "border-white/5"
+      }`}
+    >
       <div className="min-w-0">
         <span className="text-[10px] font-label text-outline uppercase tracking-widest block mb-0.5">
           {label}
@@ -52,7 +64,6 @@ export function VoiceCard({
           </span>
         </button>
       </div>
-      {/* Bad Voice Flag Button */}
       <button
         onClick={onFlag}
         className="mt-auto flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg border border-red-900/40 text-red-400/60 text-[10px] font-bold uppercase tracking-wider hover:bg-red-500/10 transition-colors w-full"
@@ -63,6 +74,3 @@ export function VoiceCard({
     </div>
   );
 }
-
-
-// hello

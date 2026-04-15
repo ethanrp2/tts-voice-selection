@@ -3,16 +3,15 @@ interface LeaderboardCardProps {
   name: string;
   provider: string;
   description: string;
-  rating: number;
-  matchCount: number;
   winCount: number;
+  matchCount: number;
 }
 
 const RANK_CONFIG = [
   {
     icon: "trophy",
     borderClass: "border-primary/10",
-    ratingColor: "text-primary",
+    statColor: "text-primary",
     barColor: "bg-primary",
     iconBg: "bg-primary-container/20",
     iconColor: "text-primary",
@@ -20,7 +19,7 @@ const RANK_CONFIG = [
   {
     icon: "star",
     borderClass: "border-white/5",
-    ratingColor: "text-secondary",
+    statColor: "text-secondary",
     barColor: "bg-secondary",
     iconBg: "bg-surface-variant",
     iconColor: "text-on-surface",
@@ -28,7 +27,7 @@ const RANK_CONFIG = [
   {
     icon: "workspace_premium",
     borderClass: "border-white/5",
-    ratingColor: "text-secondary",
+    statColor: "text-secondary",
     barColor: "bg-secondary",
     iconBg: "bg-surface-variant",
     iconColor: "text-on-surface",
@@ -40,14 +39,13 @@ export function LeaderboardCard({
   name,
   provider,
   description,
-  rating,
-  matchCount,
   winCount,
+  matchCount,
 }: LeaderboardCardProps) {
   const config = RANK_CONFIG[rank - 1] || RANK_CONFIG[2];
   const winRate =
     matchCount > 0 ? Math.round((winCount / matchCount) * 100) : 0;
-  const barWidth = Math.min(Math.round((rating / 1600) * 100), 100);
+  const barWidth = matchCount > 0 ? Math.min(Math.round((winCount / matchCount) * 100), 100) : 0;
 
   const bgClass =
     rank === 1 ? "bg-surface-container-low" : "bg-surface-container";
@@ -81,11 +79,11 @@ export function LeaderboardCard({
           {provider} &bull; {description}
         </p>
         <div className="flex items-baseline gap-1.5 mb-3">
-          <span className={`font-headline text-4xl font-black ${config.ratingColor}`}>
-            {rating}
+          <span className={`font-headline text-4xl font-black ${config.statColor}`}>
+            {winCount}
           </span>
           <span className="font-label text-[10px] text-on-surface-variant uppercase font-bold">
-            ELO
+            Wins
           </span>
         </div>
         <div className="h-1 w-full bg-surface-variant rounded-full overflow-hidden">

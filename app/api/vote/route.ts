@@ -1,27 +1,20 @@
 import { createServerClient } from "@/lib/supabase";
-import { calculateElo } from "@/lib/elo";
 
 interface VoteBody {
   matchupId: string;
-  votes: {
-    appeal: "a" | "b";
-    empathy: "a" | "b";
-    authority: "a" | "b";
-    energy: "a" | "b";
-  };
+  preferred: "a" | "b";
 }
 
 export async function POST(request: Request) {
   const body: VoteBody = await request.json();
-  const { matchupId, votes } = body;
+  const { matchupId, preferred } = body;
 
-  if (!matchupId || !votes?.appeal || !votes?.empathy || !votes?.authority || !votes?.energy) {
+  if (!matchupId || !preferred || !["a", "b"].includes(preferred)) {
     return Response.json({ error: "Missing required fields" }, { status: 400 });
   }
 
   const supabase = createServerClient();
 
-  // Get the matchup to find voice IDs
   const { data: matchup, error: matchupError } = await supabase
     .from("matchups")
     .select("voice_a_id, voice_b_id")
@@ -33,73 +26,39 @@ export async function POST(request: Request) {
   }
 
   const { voice_a_id, voice_b_id } = matchup;
+  const winnerId = preferred === "a" ? voice_a_id : voice_b_id;
+  const loserId = preferred === "a" ? voice_b_id : voice_a_id;
 
-  // Insert votes for each category
-  const categories = ["appeal", "empathy", "authority", "energy"] as const;
-  for (const category of categories) {
-    const { error } = await supabase.from("votes").insert({
-      matchup_id: matchupId,
-      category,
-      winner: votes[category],
-    });
+  const { error: voteError } = await supabase.from("votes").insert({
+    matchup_id: matchupId,
+    category: "preferred",
+    winner: preferred,
+  });
 
-    if (error) {
-      return Response.json(
-        { error: `Failed to save ${category} vote` },
-        { status: 500 }
-      );
-    }
+  if (voteError) {
+    return Response.json({ error: "Failed to save vote" }, { status: 500 });
   }
 
-  // Update ELO for each category
-  for (const category of categories) {
-    const winner = votes[category];
+  const [{ data: winner }, { data: loser }] = await Promise.all([
+    supabase.from("voices").select("win_count, match_count").eq("id", winnerId).single(),
+    supabase.from("voices").select("match_count").eq("id", loserId).single(),
+  ]);
 
-    // Get current ratings
-    const { data: ratingA } = await supabase
-      .from("elo_ratings")
-      .select("rating, match_count, win_count")
-      .eq("voice_id", voice_a_id)
-      .eq("category", category)
-      .single();
-
-    const { data: ratingB } = await supabase
-      .from("elo_ratings")
-      .select("rating, match_count, win_count")
-      .eq("voice_id", voice_b_id)
-      .eq("category", category)
-      .single();
-
-    if (!ratingA || !ratingB) continue;
-
-    const [newRatingA, newRatingB] = calculateElo(
-      ratingA.rating,
-      ratingB.rating,
-      winner
-    );
-
-    await supabase
-      .from("elo_ratings")
+  await Promise.all([
+    supabase
+      .from("voices")
       .update({
-        rating: newRatingA,
-        match_count: ratingA.match_count + 1,
-        win_count: ratingA.win_count + (winner === "a" ? 1 : 0),
-        updated_at: new Date().toISOString(),
+        win_count: (winner?.win_count ?? 0) + 1,
+        match_count: (winner?.match_count ?? 0) + 1,
       })
-      .eq("voice_id", voice_a_id)
-      .eq("category", category);
-
-    await supabase
-      .from("elo_ratings")
+      .eq("id", winnerId),
+    supabase
+      .from("voices")
       .update({
-        rating: newRatingB,
-        match_count: ratingB.match_count + 1,
-        win_count: ratingB.win_count + (winner === "b" ? 1 : 0),
-        updated_at: new Date().toISOString(),
+        match_count: (loser?.match_count ?? 0) + 1,
       })
-      .eq("voice_id", voice_b_id)
-      .eq("category", category);
-  }
+      .eq("id", loserId),
+  ]);
 
   return Response.json({ success: true });
 }

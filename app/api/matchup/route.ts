@@ -6,7 +6,7 @@ export async function GET() {
   // Get 2 random active voices
   const { data: voices, error: voicesError } = await supabase
     .from("voices")
-    .select("id, name")
+    .select("id, name, win_count")
     .eq("active", true);
 
   if (voicesError || !voices || voices.length < 2) {
@@ -24,7 +24,7 @@ export async function GET() {
   // Get a random active phrase
   const { data: phrases, error: phrasesError } = await supabase
     .from("phrases")
-    .select("id, text")
+    .select("id, text, use_case, industry, description")
     .eq("active", true);
 
   if (phrasesError || !phrases || phrases.length === 0) {
@@ -54,7 +54,10 @@ export async function GET() {
   return Response.json({
     matchupId: matchup.id,
     phrase: phrase.text,
-    voiceA: { id: voiceA.id, name: voiceA.name },
-    voiceB: { id: voiceB.id, name: voiceB.name },
+    useCase: phrase.use_case || null,
+    industry: phrase.industry || null,
+    description: phrase.description || null,
+    voiceA: { id: voiceA.id, name: voiceA.name, wins: voiceA.win_count ?? 0 },
+    voiceB: { id: voiceB.id, name: voiceB.name, wins: voiceB.win_count ?? 0 },
   });
 }

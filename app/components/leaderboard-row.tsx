@@ -13,7 +13,7 @@ interface LeaderboardRowProps {
   name: string;
   provider: string;
   description: string;
-  rating: number;
+  winCount: number;
   matchCount: number;
 }
 
@@ -22,7 +22,7 @@ export function LeaderboardRow({
   name,
   provider,
   description,
-  rating,
+  winCount,
   matchCount,
 }: LeaderboardRowProps) {
   const icon = ROW_ICONS[(rank - 4) % ROW_ICONS.length];
@@ -47,7 +47,7 @@ export function LeaderboardRow({
       </div>
       <div className="col-span-3 md:col-span-2 text-right">
         <span className="font-headline text-xl font-black text-on-surface">
-          {rating}
+          {winCount}
         </span>
       </div>
       <div className="hidden md:block col-span-2 text-right">

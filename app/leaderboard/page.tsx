@@ -3,38 +3,70 @@
 import { useState, useEffect, useCallback } from "react";
 import { Header } from "../components/header";
 import { BottomNav } from "../components/bottom-nav";
-import { FilterPills } from "../components/filter-pills";
 import { LeaderboardCard } from "../components/leaderboard-card";
 import { LeaderboardRow } from "../components/leaderboard-row";
+
+const INDUSTRIES = [
+  "Healthcare",
+  "Insurance",
+  "Home Services",
+  "Financial Services",
+  "Automotive",
+  "Retail",
+  "Resorts & Hospitality",
+];
+
+const USE_CASES = [
+  "Lead Qualification",
+  "Appt. Scheduling",
+  "Financial Services",
+  "Customer Support",
+  "Inbound Triage",
+  "Account Management",
+  "Authentication",
+  "Healthcare/Insurance",
+  "Lead Capture",
+  "Objection Handling",
+];
 
 interface VoiceEntry {
   id: string;
   name: string;
   provider: string;
   description: string;
-  rating: number;
-  matchCount: number;
   winCount: number;
+  matchCount: number;
   rank: number;
 }
 
 export default function LeaderboardPage() {
-  const [category, setCategory] = useState("appeal");
   const [voices, setVoices] = useState<VoiceEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [offset, setOffset] = useState(0);
   const [hasMore, setHasMore] = useState(true);
+  const [industry, setIndustry] = useState("");
+  const [useCase, setUseCase] = useState("");
 
   const LIMIT = 20;
+
+  const buildUrl = useCallback(
+    (newOffset: number) => {
+      const params = new URLSearchParams();
+      params.set("limit", String(LIMIT));
+      params.set("offset", String(newOffset));
+      if (industry) params.set("industry", industry);
+      if (useCase) params.set("useCase", useCase);
+      return `/api/leaderboard?${params.toString()}`;
+    },
+    [industry, useCase]
+  );
 
   const fetchLeaderboard = useCallback(
     async (reset = false) => {
       setLoading(true);
       const newOffset = reset ? 0 : offset;
       try {
-        const res = await fetch(
-          `/api/leaderboard?category=${category}&limit=${LIMIT}&offset=${newOffset}`
-        );
+        const res = await fetch(buildUrl(newOffset));
         if (res.ok) {
           const data = await res.json();
           if (reset) {
@@ -50,7 +82,7 @@ export default function LeaderboardPage() {
         setLoading(false);
       }
     },
-    [category, offset]
+    [offset, buildUrl]
   );
 
   useEffect(() => {
@@ -61,9 +93,12 @@ export default function LeaderboardPage() {
     const fetchInitial = async () => {
       setLoading(true);
       try {
-        const res = await fetch(
-          `/api/leaderboard?category=${category}&limit=${LIMIT}&offset=0`
-        );
+        const params = new URLSearchParams();
+        params.set("limit", String(LIMIT));
+        params.set("offset", "0");
+        if (industry) params.set("industry", industry);
+        if (useCase) params.set("useCase", useCase);
+        const res = await fetch(`/api/leaderboard?${params.toString()}`);
         if (res.ok) {
           const data = await res.json();
           setVoices(data.voices);
@@ -76,7 +111,12 @@ export default function LeaderboardPage() {
     };
 
     fetchInitial();
-  }, [category]);
+  }, [industry, useCase]);
+
+  const hasFilter = industry !== "" || useCase !== "";
+  const filterLabel = hasFilter
+    ? [industry, useCase].filter(Boolean).join(" × ")
+    : "";
 
   const top3 = voices.slice(0, 3);
   const rest = voices.slice(3);
@@ -86,7 +126,7 @@ export default function LeaderboardPage() {
       <Header showDesktopNav />
 
       <main className="flex-1 max-w-screen-xl mx-auto px-4 md:px-6 py-8 md:py-12 w-full">
-        {/* Hero Title Section */}
+        {/* Hero Title + Filters */}
         <section className="mb-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
@@ -94,13 +134,54 @@ export default function LeaderboardPage() {
                 TOP VOICES
               </h1>
               <p className="text-on-surface-variant font-body text-base md:text-lg max-w-md">
-                Global ranking of AI synthesis engines based on human matchups.
+                {hasFilter ? (
+                  <>
+                    Rankings for{" "}
+                    <span className="text-on-surface font-semibold">
+                      {filterLabel}
+                    </span>
+                  </>
+                ) : (
+                  "Overall rankings based on human preference across all industries and use cases."
+                )}
               </p>
             </div>
-            <FilterPills
-              selected={category}
-              onSelect={(c) => setCategory(c)}
-            />
+            <div className="flex gap-3 shrink-0">
+              <div className="relative">
+                <select
+                  value={industry}
+                  onChange={(e) => setIndustry(e.target.value)}
+                  className="bg-surface-container-low border border-white/[0.06] rounded-xl pl-3 pr-8 py-2 text-xs font-label font-semibold tracking-wide text-on-surface/80 focus:outline-none focus:border-[#7ec8e3]/40 focus:shadow-[0_0_12px_rgba(126,200,227,0.15)] appearance-none cursor-pointer transition-all hover:border-white/10"
+                >
+                  <option value="">All Industries</option>
+                  {INDUSTRIES.map((i) => (
+                    <option key={i} value={i}>
+                      {i}
+                    </option>
+                  ))}
+                </select>
+                <span className="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant/40 text-sm pointer-events-none">
+                  expand_more
+                </span>
+              </div>
+              <div className="relative">
+                <select
+                  value={useCase}
+                  onChange={(e) => setUseCase(e.target.value)}
+                  className="bg-surface-container-low border border-white/[0.06] rounded-xl pl-3 pr-8 py-2 text-xs font-label font-semibold tracking-wide text-on-surface/80 focus:outline-none focus:border-[#d095ff]/40 focus:shadow-[0_0_12px_rgba(208,149,255,0.15)] appearance-none cursor-pointer transition-all hover:border-white/10"
+                >
+                  <option value="">All Use Cases</option>
+                  {USE_CASES.map((uc) => (
+                    <option key={uc} value={uc}>
+                      {uc}
+                    </option>
+                  ))}
+                </select>
+                <span className="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant/40 text-sm pointer-events-none">
+                  expand_more
+                </span>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -114,9 +195,8 @@ export default function LeaderboardPage() {
                 name={voice.name}
                 provider={voice.provider}
                 description={voice.description || ""}
-                rating={voice.rating}
-                matchCount={voice.matchCount}
                 winCount={voice.winCount}
+                matchCount={voice.matchCount}
               />
             ))}
           </section>
@@ -125,16 +205,14 @@ export default function LeaderboardPage() {
         {/* Table List for Ranks 4+ */}
         {rest.length > 0 && (
           <section className="bg-surface-container-low rounded-xl overflow-hidden shadow-2xl border border-white/5">
-            {/* List Header */}
             <div className="grid grid-cols-12 px-6 py-4 border-b border-white/5 font-label text-[10px] tracking-[0.2em] text-on-surface-variant uppercase">
               <div className="col-span-1">Rank</div>
               <div className="col-span-8 md:col-span-7">Voice Model</div>
-              <div className="col-span-3 md:col-span-2 text-right">ELO</div>
+              <div className="col-span-3 md:col-span-2 text-right">Wins</div>
               <div className="hidden md:block col-span-2 text-right">
                 Matchups
               </div>
             </div>
-            {/* List Rows */}
             <div className="divide-y divide-white/5">
               {rest.map((voice) => (
                 <LeaderboardRow
@@ -143,12 +221,11 @@ export default function LeaderboardPage() {
                   name={voice.name}
                   provider={voice.provider}
                   description={voice.description || ""}
-                  rating={voice.rating}
+                  winCount={voice.winCount}
                   matchCount={voice.matchCount}
                 />
               ))}
             </div>
-            {/* Load More */}
             {hasMore && (
               <div className="p-4 text-center border-t border-white/5">
                 <button
@@ -171,7 +248,9 @@ export default function LeaderboardPage() {
             </span>
             <p className="font-headline text-xl font-bold">No rankings yet</p>
             <p className="text-sm mt-2">
-              Start voting to see voices ranked here.
+              {hasFilter
+                ? "No votes recorded for this filter yet. Try a different combination."
+                : "Start voting to see voices ranked here."}
             </p>
           </div>
         )}
@@ -186,10 +265,8 @@ export default function LeaderboardPage() {
         )}
       </main>
 
-      {/* Spacer for fixed bottom nav */}
       <div className="h-24" />
 
-      {/* Fixed Bottom Nav */}
       <div className="fixed bottom-0 left-0 w-full z-50">
         <BottomNav />
       </div>
