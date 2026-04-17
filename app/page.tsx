@@ -12,8 +12,8 @@ interface Matchup {
   useCase: string | null;
   industry: string | null;
   description: string | null;
-  voiceA: { id: string; name: string; wins: number };
-  voiceB: { id: string; name: string; wins: number };
+  voiceA: { id: string; name: string };
+  voiceB: { id: string; name: string };
 }
 
 export default function VotePage() {
@@ -70,11 +70,7 @@ export default function VotePage() {
     setSubmitting(true);
     stop();
 
-    const chosenWins = preferred === "a" ? matchup.voiceA.wins : matchup.voiceB.wins;
-    const otherWins = preferred === "a" ? matchup.voiceB.wins : matchup.voiceA.wins;
-    const correct = chosenWins >= otherWins;
-
-    setFeedback({ side: preferred, correct });
+    setFeedback({ side: preferred, correct: true });
 
     fetch("/api/vote", {
       method: "POST",

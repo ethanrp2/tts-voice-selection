@@ -13,20 +13,18 @@ const INDUSTRIES = [
   "Financial Services",
   "Automotive",
   "Retail",
-  "Resorts & Hospitality",
+  "Hospitality",
+  "Legal",
 ];
 
 const USE_CASES = [
-  "Lead Qualification",
-  "Appt. Scheduling",
-  "Financial Services",
+  "Incident Intake",
+  "Capture & Qualification",
+  "Scheduling Appointments & Coordination",
+  "Collections & Payment Recovery",
   "Customer Support",
-  "Inbound Triage",
-  "Account Management",
-  "Authentication",
-  "Healthcare/Insurance",
-  "Lead Capture",
-  "Objection Handling",
+  "Post-Sale Outreach",
+  "Marketplace Fulfillment",
 ];
 
 interface VoiceEntry {
@@ -34,7 +32,7 @@ interface VoiceEntry {
   name: string;
   provider: string;
   description: string;
-  winCount: number;
+  eloRating: number;
   matchCount: number;
   rank: number;
 }
@@ -195,7 +193,7 @@ export default function LeaderboardPage() {
                 name={voice.name}
                 provider={voice.provider}
                 description={voice.description || ""}
-                winCount={voice.winCount}
+                eloRating={voice.eloRating}
                 matchCount={voice.matchCount}
               />
             ))}
@@ -208,7 +206,7 @@ export default function LeaderboardPage() {
             <div className="grid grid-cols-12 px-6 py-4 border-b border-white/5 font-label text-[10px] tracking-[0.2em] text-on-surface-variant uppercase">
               <div className="col-span-1">Rank</div>
               <div className="col-span-8 md:col-span-7">Voice Model</div>
-              <div className="col-span-3 md:col-span-2 text-right">Wins</div>
+              <div className="col-span-3 md:col-span-2 text-right">ELO</div>
               <div className="hidden md:block col-span-2 text-right">
                 Matchups
               </div>
@@ -221,7 +219,7 @@ export default function LeaderboardPage() {
                   name={voice.name}
                   provider={voice.provider}
                   description={voice.description || ""}
-                  winCount={voice.winCount}
+                  eloRating={voice.eloRating}
                   matchCount={voice.matchCount}
                 />
               ))}

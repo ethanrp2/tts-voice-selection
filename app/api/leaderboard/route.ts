@@ -26,9 +26,9 @@ export async function GET(request: NextRequest) {
   if (!hasFilter) {
     const { data, error } = await supabase
       .from("voices")
-      .select("id, name, provider, description, win_count, match_count")
+      .select("id, name, provider, description, elo_rating, match_count")
       .eq("active", true)
-      .order("win_count", { ascending: false })
+      .order("elo_rating", { ascending: false })
       .range(offset, offset + limit - 1);
 
     if (error) {
@@ -40,7 +40,7 @@ export async function GET(request: NextRequest) {
       name: voice.name,
       provider: voice.provider,
       description: modelForProvider(voice.provider),
-      winCount: voice.win_count ?? 0,
+      eloRating: voice.elo_rating ?? 1500,
       matchCount: voice.match_count ?? 0,
       rank: offset + index + 1,
     }));
@@ -48,97 +48,82 @@ export async function GET(request: NextRequest) {
     return Response.json({ voices, filter: "overall" });
   }
 
-  // Filtered: compute wins from votes → matchups → phrases
+  // Filtered: show ALL voices sorted by global ELO, with per-filter win stats
+
+  // 1. Fetch ALL active voices (so every voice appears regardless of matchup history)
+  const { data: allVoices } = await supabase
+    .from("voices")
+    .select("id, name, provider, elo_rating, match_count")
+    .eq("active", true);
+
+  if (!allVoices || allVoices.length === 0) {
+    return Response.json({ voices: [], filter: "filtered" });
+  }
+
+  // 2. Compute per-filter win/match stats from matchups → votes
   const phraseQuery = supabase.from("phrases").select("id").eq("active", true);
   if (industry) phraseQuery.eq("industry", industry);
   if (useCase) phraseQuery.eq("use_case", useCase);
   const { data: phrases } = await phraseQuery;
 
-  if (!phrases || phrases.length === 0) {
-    return Response.json({ voices: [], filter: "filtered" });
+  const filterStats = new Map<string, { wins: number; matches: number }>();
+
+  if (phrases && phrases.length > 0) {
+    const phraseIds = phrases.map((p) => p.id);
+
+    const { data: matchups } = await supabase
+      .from("matchups")
+      .select("id, voice_a_id, voice_b_id")
+      .in("phrase_id", phraseIds);
+
+    if (matchups && matchups.length > 0) {
+      const matchupIds = matchups.map((m) => m.id);
+      const matchupMap = new Map(matchups.map((m) => [m.id, m]));
+
+      const { data: votes } = await supabase
+        .from("votes")
+        .select("matchup_id, winner")
+        .eq("category", "preferred")
+        .in("matchup_id", matchupIds);
+
+      const ensure = (id: string) => {
+        if (!filterStats.has(id)) filterStats.set(id, { wins: 0, matches: 0 });
+        return filterStats.get(id)!;
+      };
+
+      for (const vote of votes || []) {
+        const m = matchupMap.get(vote.matchup_id);
+        if (!m) continue;
+        const winnerId = vote.winner === "a" ? m.voice_a_id : m.voice_b_id;
+        const loserId = vote.winner === "a" ? m.voice_b_id : m.voice_a_id;
+        ensure(winnerId).wins += 1;
+        ensure(winnerId).matches += 1;
+        ensure(loserId).matches += 1;
+      }
+
+      for (const m of matchups) {
+        ensure(m.voice_a_id);
+        ensure(m.voice_b_id);
+      }
+    }
   }
 
-  const phraseIds = phrases.map((p) => p.id);
-
-  const { data: matchups } = await supabase
-    .from("matchups")
-    .select("id, voice_a_id, voice_b_id")
-    .in("phrase_id", phraseIds);
-
-  if (!matchups || matchups.length === 0) {
-    // No matchups for this filter yet — return all active voices with 0 wins
-    const { data: allVoices } = await supabase
-      .from("voices")
-      .select("id, name, provider")
-      .eq("active", true)
-      .range(offset, offset + limit - 1);
-
-    const voices = (allVoices || []).map((v, i) => ({
-      id: v.id,
-      name: v.name,
-      provider: v.provider,
-      description: modelForProvider(v.provider),
-      winCount: 0,
-      matchCount: 0,
-      rank: offset + i + 1,
-    }));
-    return Response.json({ voices, filter: "filtered" });
-  }
-
-  const matchupIds = matchups.map((m) => m.id);
-  const matchupMap = new Map(matchups.map((m) => [m.id, m]));
-
-  const { data: votes } = await supabase
-    .from("votes")
-    .select("matchup_id, winner")
-    .eq("category", "preferred")
-    .in("matchup_id", matchupIds);
-
-  // Tally wins and matches per voice
-  const stats = new Map<string, { wins: number; matches: number }>();
-
-  const ensure = (id: string) => {
-    if (!stats.has(id)) stats.set(id, { wins: 0, matches: 0 });
-    return stats.get(id)!;
-  };
-
-  for (const vote of votes || []) {
-    const m = matchupMap.get(vote.matchup_id);
-    if (!m) continue;
-    const winnerId = vote.winner === "a" ? m.voice_a_id : m.voice_b_id;
-    const loserId = vote.winner === "a" ? m.voice_b_id : m.voice_a_id;
-    ensure(winnerId).wins += 1;
-    ensure(winnerId).matches += 1;
-    ensure(loserId).matches += 1;
-  }
-
-  // Also count matchups with no votes yet
-  for (const m of matchups) {
-    ensure(m.voice_a_id);
-    ensure(m.voice_b_id);
-  }
-
-  // Fetch voice details
-  const voiceIds = [...stats.keys()];
-  const { data: voiceData } = await supabase
-    .from("voices")
-    .select("id, name, provider")
-    .eq("active", true)
-    .in("id", voiceIds);
-
-  const voiceMap = new Map((voiceData || []).map((v) => [v.id, v]));
-
-  const ranked = [...stats.entries()]
-    .filter(([id]) => voiceMap.has(id))
-    .map(([id, s]) => ({
-      id,
-      name: voiceMap.get(id)!.name,
-      provider: voiceMap.get(id)!.provider,
-      description: modelForProvider(voiceMap.get(id)!.provider),
-      winCount: s.wins,
-      matchCount: s.matches,
-    }))
-    .sort((a, b) => b.winCount - a.winCount)
+  // 3. Merge: all voices with global ELO + filter-specific stats
+  const ranked = allVoices
+    .map((v) => {
+      const fs = filterStats.get(v.id);
+      return {
+        id: v.id,
+        name: v.name,
+        provider: v.provider,
+        description: modelForProvider(v.provider),
+        eloRating: v.elo_rating ?? 1500,
+        matchCount: v.match_count ?? 0,
+        filterWins: fs?.wins ?? 0,
+        filterMatches: fs?.matches ?? 0,
+      };
+    })
+    .sort((a, b) => b.eloRating - a.eloRating)
     .slice(offset, offset + limit)
     .map((v, i) => ({ ...v, rank: offset + i + 1 }));
 

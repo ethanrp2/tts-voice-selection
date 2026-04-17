@@ -1,12 +1,23 @@
 import { createServerClient } from "@/lib/supabase";
 
+/** Pick a random index using weights (higher weight = more likely). */
+function weightedRandomIndex(weights: number[]): number {
+  const total = weights.reduce((sum, w) => sum + w, 0);
+  let r = Math.random() * total;
+  for (let i = 0; i < weights.length; i++) {
+    r -= weights[i];
+    if (r <= 0) return i;
+  }
+  return weights.length - 1;
+}
+
 export async function GET() {
   const supabase = createServerClient();
 
-  // Get 2 random active voices
+  // Get all active voices with match_count for balanced selection
   const { data: voices, error: voicesError } = await supabase
     .from("voices")
-    .select("id, name, win_count")
+    .select("id, name, match_count")
     .eq("active", true);
 
   if (voicesError || !voices || voices.length < 2) {
@@ -16,10 +27,17 @@ export async function GET() {
     );
   }
 
-  // Shuffle and pick 2
-  const shuffled = voices.sort(() => Math.random() - 0.5);
-  const voiceA = shuffled[0];
-  const voiceB = shuffled[1];
+  // Weighted random: voices with fewer matches are more likely to be picked
+  const weights = voices.map((v) => 1 / ((v.match_count ?? 0) + 1));
+
+  const indexA = weightedRandomIndex(weights);
+  const voiceA = voices[indexA];
+
+  // Remove voice A from pool, recompute weights, pick voice B
+  const remaining = voices.filter((_, i) => i !== indexA);
+  const remainingWeights = remaining.map((v) => 1 / ((v.match_count ?? 0) + 1));
+  const indexB = weightedRandomIndex(remainingWeights);
+  const voiceB = remaining[indexB];
 
   // Get a random active phrase
   const { data: phrases, error: phrasesError } = await supabase
@@ -57,7 +75,7 @@ export async function GET() {
     useCase: phrase.use_case || null,
     industry: phrase.industry || null,
     description: phrase.description || null,
-    voiceA: { id: voiceA.id, name: voiceA.name, wins: voiceA.win_count ?? 0 },
-    voiceB: { id: voiceB.id, name: voiceB.name, wins: voiceB.win_count ?? 0 },
+    voiceA: { id: voiceA.id, name: voiceA.name },
+    voiceB: { id: voiceB.id, name: voiceB.name },
   });
 }

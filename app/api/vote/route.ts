@@ -1,4 +1,5 @@
 import { createServerClient } from "@/lib/supabase";
+import { calculateElo } from "@/lib/elo";
 
 interface VoteBody {
   matchupId: string;
@@ -26,8 +27,6 @@ export async function POST(request: Request) {
   }
 
   const { voice_a_id, voice_b_id } = matchup;
-  const winnerId = preferred === "a" ? voice_a_id : voice_b_id;
-  const loserId = preferred === "a" ? voice_b_id : voice_a_id;
 
   const { error: voteError } = await supabase.from("votes").insert({
     matchup_id: matchupId,
@@ -39,25 +38,33 @@ export async function POST(request: Request) {
     return Response.json({ error: "Failed to save vote" }, { status: 500 });
   }
 
-  const [{ data: winner }, { data: loser }] = await Promise.all([
-    supabase.from("voices").select("win_count, match_count").eq("id", winnerId).single(),
-    supabase.from("voices").select("match_count").eq("id", loserId).single(),
+  // Fetch current ELO ratings for both voices
+  const [{ data: voiceA }, { data: voiceB }] = await Promise.all([
+    supabase.from("voices").select("elo_rating, match_count").eq("id", voice_a_id).single(),
+    supabase.from("voices").select("elo_rating, match_count").eq("id", voice_b_id).single(),
   ]);
 
+  const ratingA = voiceA?.elo_rating ?? 1500;
+  const ratingB = voiceB?.elo_rating ?? 1500;
+
+  const [newRatingA, newRatingB] = calculateElo(ratingA, ratingB, preferred);
+
+  // Update both voices with new ELO ratings and increment match counts
   await Promise.all([
     supabase
       .from("voices")
       .update({
-        win_count: (winner?.win_count ?? 0) + 1,
-        match_count: (winner?.match_count ?? 0) + 1,
+        elo_rating: newRatingA,
+        match_count: (voiceA?.match_count ?? 0) + 1,
       })
-      .eq("id", winnerId),
+      .eq("id", voice_a_id),
     supabase
       .from("voices")
       .update({
-        match_count: (loser?.match_count ?? 0) + 1,
+        elo_rating: newRatingB,
+        match_count: (voiceB?.match_count ?? 0) + 1,
       })
-      .eq("id", loserId),
+      .eq("id", voice_b_id),
   ]);
 
   return Response.json({ success: true });

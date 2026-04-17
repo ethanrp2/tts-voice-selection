@@ -3,7 +3,7 @@ interface LeaderboardCardProps {
   name: string;
   provider: string;
   description: string;
-  winCount: number;
+  eloRating: number;
   matchCount: number;
 }
 
@@ -39,13 +39,12 @@ export function LeaderboardCard({
   name,
   provider,
   description,
-  winCount,
+  eloRating,
   matchCount,
 }: LeaderboardCardProps) {
   const config = RANK_CONFIG[rank - 1] || RANK_CONFIG[2];
-  const winRate =
-    matchCount > 0 ? Math.round((winCount / matchCount) * 100) : 0;
-  const barWidth = matchCount > 0 ? Math.min(Math.round((winCount / matchCount) * 100), 100) : 0;
+  // Normalize ELO to a 0-100 bar width (1000 = 0%, 2000 = 100%)
+  const barWidth = Math.max(0, Math.min(100, Math.round(((eloRating - 1000) / 1000) * 100)));
 
   const bgClass =
     rank === 1 ? "bg-surface-container-low" : "bg-surface-container";
@@ -80,10 +79,10 @@ export function LeaderboardCard({
         </p>
         <div className="flex items-baseline gap-1.5 mb-3">
           <span className={`font-headline text-4xl font-black ${config.statColor}`}>
-            {winCount}
+            {eloRating}
           </span>
           <span className="font-label text-[10px] text-on-surface-variant uppercase font-bold">
-            Wins
+            ELO
           </span>
         </div>
         <div className="h-1 w-full bg-surface-variant rounded-full overflow-hidden">
@@ -93,7 +92,7 @@ export function LeaderboardCard({
           />
         </div>
         <p className="mt-3 font-body text-[10px] text-on-surface-variant">
-          {matchCount.toLocaleString()} Matches &bull; {winRate}% Win Rate
+          {matchCount.toLocaleString()} Matches
         </p>
       </div>
     </div>
