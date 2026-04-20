@@ -17,7 +17,7 @@ export async function GET() {
   // Get all active voices with match_count for balanced selection
   const { data: voices, error: voicesError } = await supabase
     .from("voices")
-    .select("id, name, match_count")
+    .select("id, name, match_count, provider")
     .eq("active", true);
 
   if (voicesError || !voices || voices.length < 2) {
@@ -75,7 +75,7 @@ export async function GET() {
     useCase: phrase.use_case || null,
     industry: phrase.industry || null,
     description: phrase.description || null,
-    voiceA: { id: voiceA.id, name: voiceA.name },
-    voiceB: { id: voiceB.id, name: voiceB.name },
+    voiceA: { id: voiceA.id, name: voiceA.name, provider: voiceA.provider },
+    voiceB: { id: voiceB.id, name: voiceB.name, provider: voiceB.provider },
   });
 }

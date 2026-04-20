@@ -67,5 +67,11 @@ export async function POST(request: Request) {
       .eq("id", voice_b_id),
   ]);
 
-  return Response.json({ success: true });
+  return Response.json({
+    success: true,
+    eloA: newRatingA,
+    eloB: newRatingB,
+    prevEloA: ratingA,
+    prevEloB: ratingB,
+  });
 }
