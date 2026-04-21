@@ -265,7 +265,7 @@ export default function VotePage() {
                     ? eloFeedback.pickedPopular
                       ? "bg-green-500 text-black shadow-[0_0_15px_rgba(74,222,128,0.4)]"
                       : "bg-red-500 text-black shadow-[0_0_15px_rgba(248,113,113,0.4)]"
-                    : eloFeedback && eloFeedback.preferred !== "a"
+                    : eloFeedback
                     ? "bg-surface-container-highest text-on-surface/20 border border-white/5"
                     : "bg-surface-container-highest text-on-surface/50 border border-white/5 hover:bg-[#d095ff]/20"
                 } disabled:opacity-40`}
@@ -288,7 +288,7 @@ export default function VotePage() {
                     ? eloFeedback.pickedPopular
                       ? "bg-green-500 text-black shadow-[0_0_15px_rgba(74,222,128,0.4)]"
                       : "bg-red-500 text-black shadow-[0_0_15px_rgba(248,113,113,0.4)]"
-                    : eloFeedback && eloFeedback.preferred !== "b"
+                    : eloFeedback
                     ? "bg-surface-container-highest text-on-surface/20 border border-white/5"
                     : "bg-surface-container-highest text-on-surface/50 border border-white/5 hover:bg-accent-cyan/20"
                 } disabled:opacity-40`}
