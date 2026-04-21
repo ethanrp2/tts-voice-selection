@@ -11,6 +11,9 @@ export function Header({ showDesktopNav }: { showDesktopNav?: boolean }) {
           <span className="text-2xl font-black tracking-tighter text-accent-cyan font-headline uppercase">
             VOICE ARENA
           </span>
+          <span className="text-[10px] font-headline font-bold tracking-widest text-accent-cyan/70 border border-accent-cyan/30 rounded px-1.5 py-0.5 uppercase">
+            v2
+          </span>
         </div>
         <div className="flex items-center gap-6">
           {showDesktopNav && (
@@ -34,7 +37,10 @@ export function Header({ showDesktopNav }: { showDesktopNav?: boolean }) {
               info
             </span>
             <div className="pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200 absolute top-full right-0 mt-2 w-72 bg-[#1a1a1a] border border-white/10 rounded-lg p-4 z-50 shadow-xl">
-              <p className="text-xs font-bold text-white mb-2">About Voice Arena</p>
+              <p className="text-xs font-bold text-white mb-2">
+                About Voice Arena{" "}
+                <span className="text-accent-cyan font-black tracking-wider">V2</span>
+              </p>
               <p className="text-[11px] text-white/60 leading-relaxed mb-2">
                 Built by <span className="text-white/80 font-medium">Ethan Pereira</span> &{" "}
                 <span className="text-white/80 font-medium">Kushika Sivaprakasam</span>
@@ -42,6 +48,11 @@ export function Header({ showDesktopNav }: { showDesktopNav?: boolean }) {
               <p className="text-[11px] text-white/60 leading-relaxed mb-2">
                 We&apos;re collecting preference data on AI voices to help AEs and FDEs pick the
                 right voice for their customer&apos;s vibe and use case.
+              </p>
+              <p className="text-[11px] text-white/60 leading-relaxed mb-2">
+                <span className="text-white/80 font-medium">V2</span> pairs each test phrase with a
+                specific industry and use case — so voices are judged in context, not in a vacuum —
+                and surfaces live ELO scores plus popular-pick feedback after every vote.
               </p>
               <p className="text-[11px] text-white/60 leading-relaxed">
                 <span className="text-white/80 font-medium">Goal:</span> Evaluate the current voice
