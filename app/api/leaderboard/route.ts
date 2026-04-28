@@ -14,15 +14,23 @@ function modelForProvider(provider: string | null | undefined) {
   }
 }
 
+const PROVIDER_DISPLAY: Record<string, string> = {
+  cartesia: "Cartesia",
+  elevenlabs: "ElevenLabs",
+  rime: "Rime",
+};
+
 function isHumanDescription(description: string | null | undefined) {
   return /^Human \(.+\)$/.test(description ?? "");
 }
 
-function leaderboardDescription(
+function leaderboardProvider(
   provider: string | null | undefined,
   description: string | null | undefined,
 ) {
-  return isHumanDescription(description) ? description! : modelForProvider(provider);
+  if (!isHumanDescription(description)) return provider ?? "";
+  const key = (provider ?? "").toLowerCase();
+  return `Human - ${PROVIDER_DISPLAY[key] ?? provider ?? ""}`;
 }
 
 export async function GET(request: NextRequest) {
@@ -49,8 +57,8 @@ export async function GET(request: NextRequest) {
     const voices = data.map((voice, index) => ({
       id: voice.id,
       name: voice.name,
-      provider: voice.provider,
-      description: leaderboardDescription(voice.provider, voice.description),
+      provider: leaderboardProvider(voice.provider, voice.description),
+      description: modelForProvider(voice.provider),
       isHuman: isHumanDescription(voice.description),
       eloRating: voice.elo_rating ?? 1500,
       matchCount: voice.match_count ?? 0,
@@ -127,8 +135,8 @@ export async function GET(request: NextRequest) {
       return {
         id: v.id,
         name: v.name,
-        provider: v.provider,
-        description: leaderboardDescription(v.provider, v.description),
+        provider: leaderboardProvider(v.provider, v.description),
+        description: modelForProvider(v.provider),
         isHuman: isHumanDescription(v.description),
         eloRating: v.elo_rating ?? 1500,
         matchCount: v.match_count ?? 0,

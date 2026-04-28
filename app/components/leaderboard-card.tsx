@@ -75,9 +75,7 @@ export function LeaderboardCard({
         </div>
         <h3 className="font-headline text-2xl font-bold mb-0.5">{name}</h3>
         <p className="font-label text-[10px] tracking-widest text-on-surface-variant uppercase mb-4">
-          {/^Human \(.+\)$/.test(description)
-            ? description
-            : `${provider} \u2022 ${description}`}
+          {provider} &bull; {description}
         </p>
         <div className="flex items-baseline gap-1.5 mb-3">
           <span className={`font-headline text-4xl font-black ${config.statColor}`}>
