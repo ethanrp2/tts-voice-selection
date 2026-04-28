@@ -12,8 +12,8 @@ interface Matchup {
   useCase: string | null;
   industry: string | null;
   description: string | null;
-  voiceA: { id: string; name: string; provider: string };
-  voiceB: { id: string; name: string; provider: string };
+  voiceA: { id: string; name: string; provider: string; description: string | null };
+  voiceB: { id: string; name: string; provider: string; description: string | null };
 }
 
 interface EloFeedback {
@@ -222,6 +222,7 @@ export default function VotePage() {
               label="Voice A"
               name={matchup?.voiceA.name || "Voice A"}
               provider={matchup?.voiceA.provider || null}
+              description={matchup?.voiceA.description ?? null}
               variant="a"
               isPlaying={playingId === matchup?.voiceA.id}
               isLoading={loadingId === matchup?.voiceA.id}
@@ -239,6 +240,7 @@ export default function VotePage() {
               label="Voice B"
               name={matchup?.voiceB.name || "Voice B"}
               provider={matchup?.voiceB.provider || null}
+              description={matchup?.voiceB.description ?? null}
               variant="b"
               isPlaying={playingId === matchup?.voiceB.id}
               isLoading={loadingId === matchup?.voiceB.id}

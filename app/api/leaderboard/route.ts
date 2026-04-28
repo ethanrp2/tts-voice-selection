@@ -14,6 +14,17 @@ function modelForProvider(provider: string | null | undefined) {
   }
 }
 
+function isHumanDescription(description: string | null | undefined) {
+  return /^Human \(.+\)$/.test(description ?? "");
+}
+
+function leaderboardDescription(
+  provider: string | null | undefined,
+  description: string | null | undefined,
+) {
+  return isHumanDescription(description) ? description! : modelForProvider(provider);
+}
+
 export async function GET(request: NextRequest) {
   const limit = parseInt(request.nextUrl.searchParams.get("limit") || "50", 10);
   const offset = parseInt(request.nextUrl.searchParams.get("offset") || "0", 10);
@@ -39,7 +50,8 @@ export async function GET(request: NextRequest) {
       id: voice.id,
       name: voice.name,
       provider: voice.provider,
-      description: modelForProvider(voice.provider),
+      description: leaderboardDescription(voice.provider, voice.description),
+      isHuman: isHumanDescription(voice.description),
       eloRating: voice.elo_rating ?? 1500,
       matchCount: voice.match_count ?? 0,
       rank: offset + index + 1,
@@ -53,7 +65,7 @@ export async function GET(request: NextRequest) {
   // 1. Fetch ALL active voices (so every voice appears regardless of matchup history)
   const { data: allVoices } = await supabase
     .from("voices")
-    .select("id, name, provider, elo_rating, match_count")
+    .select("id, name, provider, description, elo_rating, match_count")
     .eq("active", true);
 
   if (!allVoices || allVoices.length === 0) {
@@ -116,7 +128,8 @@ export async function GET(request: NextRequest) {
         id: v.id,
         name: v.name,
         provider: v.provider,
-        description: modelForProvider(v.provider),
+        description: leaderboardDescription(v.provider, v.description),
+        isHuman: isHumanDescription(v.description),
         eloRating: v.elo_rating ?? 1500,
         matchCount: v.match_count ?? 0,
         filterWins: fs?.wins ?? 0,

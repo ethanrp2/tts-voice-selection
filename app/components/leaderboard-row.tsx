@@ -41,7 +41,9 @@ export function LeaderboardRow({
         <div className="truncate">
           <p className="font-headline font-bold text-base truncate">{name}</p>
           <p className="text-[10px] text-on-surface-variant truncate">
-            {provider} &bull; {description}
+            {/^Human \(.+\)$/.test(description)
+              ? description
+              : `${provider} \u2022 ${description}`}
           </p>
         </div>
       </div>

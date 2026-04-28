@@ -6,10 +6,15 @@ const PROVIDER_LABELS: Record<string, { label: string; color: string }> = {
   rime: { label: "Rime", color: "text-emerald-400 bg-emerald-400/10 border-emerald-400/20" },
 };
 
+const HUMAN_LABEL_REGEX = /^Human \(.+\)$/;
+const HUMAN_CHIP_COLOR =
+  "text-amber-300 bg-amber-300/10 border-amber-300/30";
+
 interface VoiceCardProps {
   label: string;
   name: string;
   provider: string | null;
+  description?: string | null;
   variant: "a" | "b";
   isPlaying: boolean;
   isLoading: boolean;
@@ -27,6 +32,7 @@ export function VoiceCard({
   label,
   name,
   provider,
+  description,
   variant,
   isPlaying,
   isLoading,
@@ -44,7 +50,11 @@ export function VoiceCard({
     : "shadow-[0_0_25px_rgba(125,249,255,0.5)]";
   const bgClass = isPurple ? "bg-[#d095ff]" : "bg-accent-cyan";
   const displayName = name.split(/\s(?:-|–|—|\||\().*/)[0].trim() || name;
+  const isHuman = !!description && HUMAN_LABEL_REGEX.test(description);
   const providerInfo = provider ? PROVIDER_LABELS[provider.toLowerCase()] : null;
+  const chip = isHuman
+    ? { label: description!, color: HUMAN_CHIP_COLOR }
+    : providerInfo;
 
   let borderClass: string;
   if (showFeedback && isPreferred) {
@@ -70,11 +80,11 @@ export function VoiceCard({
         <h2 className="text-sm font-headline font-bold text-on-surface truncate">
           {displayName}
         </h2>
-        {providerInfo && (
+        {chip && (
           <span
-            className={`inline-block text-[9px] font-label font-semibold uppercase tracking-wider mt-1 px-2 py-0.5 rounded-full border ${providerInfo.color}`}
+            className={`inline-block text-[9px] font-label font-semibold uppercase tracking-wider mt-1 px-2 py-0.5 rounded-full border ${chip.color}`}
           >
-            {providerInfo.label}
+            {chip.label}
           </span>
         )}
       </div>
