@@ -38,15 +38,19 @@ export async function GET(request: NextRequest) {
   const offset = parseInt(request.nextUrl.searchParams.get("offset") || "0", 10);
   const industry = request.nextUrl.searchParams.get("industry") || "";
   const useCase = request.nextUrl.searchParams.get("useCase") || "";
+  const voiceType = request.nextUrl.searchParams.get("voiceType") || "";
+  const humansOnly = voiceType === "humans";
 
   const supabase = createServerClient();
-  const hasFilter = industry !== "" || useCase !== "";
+  const hasPhraseFilter = industry !== "" || useCase !== "";
 
-  if (!hasFilter) {
-    const { data, error } = await supabase
+  if (!hasPhraseFilter) {
+    let query = supabase
       .from("voices")
       .select("id, name, provider, description, elo_rating, match_count")
-      .eq("active", true)
+      .eq("active", true);
+    if (humansOnly) query = query.ilike("description", "Human (%");
+    const { data, error } = await query
       .order("elo_rating", { ascending: false })
       .range(offset, offset + limit - 1);
 
@@ -71,10 +75,12 @@ export async function GET(request: NextRequest) {
   // Filtered: show ALL voices sorted by global ELO, with per-filter win stats
 
   // 1. Fetch ALL active voices (so every voice appears regardless of matchup history)
-  const { data: allVoices } = await supabase
+  let allVoicesQuery = supabase
     .from("voices")
     .select("id, name, provider, description, elo_rating, match_count")
     .eq("active", true);
+  if (humansOnly) allVoicesQuery = allVoicesQuery.ilike("description", "Human (%");
+  const { data: allVoices } = await allVoicesQuery;
 
   if (!allVoices || allVoices.length === 0) {
     return Response.json({ voices: [], filter: "filtered" });

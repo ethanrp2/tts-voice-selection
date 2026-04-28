@@ -44,6 +44,7 @@ export default function LeaderboardPage() {
   const [hasMore, setHasMore] = useState(true);
   const [industry, setIndustry] = useState("");
   const [useCase, setUseCase] = useState("");
+  const [voiceType, setVoiceType] = useState("");
 
   const LIMIT = 20;
 
@@ -54,9 +55,10 @@ export default function LeaderboardPage() {
       params.set("offset", String(newOffset));
       if (industry) params.set("industry", industry);
       if (useCase) params.set("useCase", useCase);
+      if (voiceType) params.set("voiceType", voiceType);
       return `/api/leaderboard?${params.toString()}`;
     },
-    [industry, useCase]
+    [industry, useCase, voiceType]
   );
 
   const fetchLeaderboard = useCallback(
@@ -96,6 +98,7 @@ export default function LeaderboardPage() {
         params.set("offset", "0");
         if (industry) params.set("industry", industry);
         if (useCase) params.set("useCase", useCase);
+        if (voiceType) params.set("voiceType", voiceType);
         const res = await fetch(`/api/leaderboard?${params.toString()}`);
         if (res.ok) {
           const data = await res.json();
@@ -109,11 +112,12 @@ export default function LeaderboardPage() {
     };
 
     fetchInitial();
-  }, [industry, useCase]);
+  }, [industry, useCase, voiceType]);
 
-  const hasFilter = industry !== "" || useCase !== "";
+  const hasFilter = industry !== "" || useCase !== "" || voiceType !== "";
+  const voiceTypeLabel = voiceType === "humans" ? "Humans Only" : "";
   const filterLabel = hasFilter
-    ? [industry, useCase].filter(Boolean).join(" × ")
+    ? [industry, useCase, voiceTypeLabel].filter(Boolean).join(" × ")
     : "";
 
   const top3 = voices.slice(0, 3);
@@ -174,6 +178,19 @@ export default function LeaderboardPage() {
                       {uc}
                     </option>
                   ))}
+                </select>
+                <span className="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant/40 text-sm pointer-events-none">
+                  expand_more
+                </span>
+              </div>
+              <div className="relative">
+                <select
+                  value={voiceType}
+                  onChange={(e) => setVoiceType(e.target.value)}
+                  className="bg-surface-container-low border border-white/[0.06] rounded-xl pl-3 pr-8 py-2 text-xs font-label font-semibold tracking-wide text-on-surface/80 focus:outline-none focus:border-amber-300/40 focus:shadow-[0_0_12px_rgba(252,211,77,0.15)] appearance-none cursor-pointer transition-all hover:border-white/10"
+                >
+                  <option value="">All Voices</option>
+                  <option value="humans">Humans Only</option>
                 </select>
                 <span className="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant/40 text-sm pointer-events-none">
                   expand_more
