@@ -1,3 +1,4 @@
+import { synthesizeElevenLabsSpeech } from "@/lib/elevenlabs";
 import { createServerClient } from "@/lib/supabase";
 
 interface TTSBody {
@@ -90,7 +91,6 @@ export async function POST(request: Request) {
     });
   } else if (provider === "elevenlabs") {
     const apiKey = process.env.ELEVENLABS_API_KEY;
-    const modelId = "eleven_turbo_v2";
 
     if (!apiKey) {
       return Response.json(
@@ -105,20 +105,31 @@ export async function POST(request: Request) {
       );
     }
 
-    upstream = await fetch(
-      `https://api.elevenlabs.io/v1/text-to-speech/${elevenLabsVoiceId}?output_format=mp3_44100_128`,
-      {
-        method: "POST",
-        headers: {
-          "xi-api-key": apiKey,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          text,
-          model_id: modelId,
-        }),
-      }
+    const synthesis = await synthesizeElevenLabsSpeech(
+      apiKey,
+      elevenLabsVoiceId,
+      text,
     );
+
+    if (!synthesis.ok) {
+      return Response.json(
+        {
+          error: "TTS generation failed",
+          details: synthesis.details,
+          provider,
+          modelId: synthesis.modelId,
+        },
+        { status: synthesis.status },
+      );
+    }
+
+    return new Response(synthesis.response.body, {
+      headers: {
+        "Content-Type":
+          synthesis.response.headers.get("content-type") || "audio/mpeg",
+        "Cache-Control": "public, max-age=3600",
+      },
+    });
   } else if (provider === "cartesia") {
     const apiKey = process.env.CARTESIA_API_KEY;
     if (!apiKey) {
