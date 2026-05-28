@@ -19,7 +19,19 @@ async function fetchTTS(voiceId: string, text: string): Promise<string> {
     body: JSON.stringify({ voiceId, text }),
   });
 
-  if (!response.ok) throw new Error("TTS request failed");
+  if (!response.ok) {
+    let message = "TTS request failed";
+    try {
+      const data = (await response.json()) as {
+        error?: string;
+        details?: string;
+      };
+      message = [data.error, data.details].filter(Boolean).join(": ") || message;
+    } catch {
+      // ignore JSON parse errors
+    }
+    throw new Error(message);
+  }
 
   const blob = await response.blob();
   const url = URL.createObjectURL(blob);
@@ -77,8 +89,8 @@ export function useAudio() {
 
         await audio.play();
         setPlayingId(voiceId);
-      } catch {
-        // Button will reset via finally
+      } catch (error) {
+        console.error("TTS playback failed:", error);
       } finally {
         setLoadingId(null);
       }

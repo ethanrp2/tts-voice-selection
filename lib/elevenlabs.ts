@@ -5,6 +5,11 @@ export const ELEVENLABS_MODEL_FALLBACKS = [
   "eleven_turbo_v2",
 ] as const;
 
+export const ELEVENLABS_OUTPUT_FORMATS = [
+  "mp3_44100_128",
+  "mp3_22050_32",
+] as const;
+
 export function elevenLabsModelCandidates(): string[] {
   const override = process.env.ELEVENLABS_MODEL_ID?.trim();
   if (!override) return [...ELEVENLABS_MODEL_FALLBACKS];
@@ -37,36 +42,49 @@ export async function synthesizeElevenLabsSpeech(
   };
 
   for (const modelId of models) {
-    const response = await fetch(
-      `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}?output_format=mp3_44100_128`,
-      {
-        method: "POST",
-        headers: {
-          "xi-api-key": apiKey,
-          "Content-Type": "application/json",
-          Accept: "audio/mpeg",
+    for (const outputFormat of ELEVENLABS_OUTPUT_FORMATS) {
+      const response = await fetch(
+        `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}?output_format=${outputFormat}`,
+        {
+          method: "POST",
+          headers: {
+            "xi-api-key": apiKey,
+            "Content-Type": "application/json",
+            Accept: "audio/mpeg",
+          },
+          body: JSON.stringify({
+            text,
+            model_id: modelId,
+          }),
         },
-        body: JSON.stringify({
-          text,
-          model_id: modelId,
-        }),
-      },
-    );
+      );
 
-    if (response.ok) {
-      return { ok: true, response, modelId };
-    }
+      if (response.ok) {
+        const audio = await response.arrayBuffer();
+        return {
+          ok: true,
+          response: new Response(audio, {
+            headers: {
+              "Content-Type":
+                response.headers.get("content-type") || "audio/mpeg",
+            },
+          }),
+          modelId,
+        };
+      }
 
-    const details = await response.text();
-    lastFailure = { ok: false, status: response.status, details, modelId };
+      const details = await response.text();
+      lastFailure = { ok: false, status: response.status, details, modelId };
 
-    // Auth, permission, and missing-voice errors won't improve with another model.
-    if (
-      response.status === 401 ||
-      response.status === 403 ||
-      response.status === 404
-    ) {
-      break;
+      if (response.status === 401) {
+        return lastFailure;
+      }
+
+      if (response.status === 404) {
+        return lastFailure;
+      }
+
+      // Try the next output format / model for quota, tier, or compatibility errors.
     }
   }
 
